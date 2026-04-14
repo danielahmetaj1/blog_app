@@ -166,3 +166,19 @@ nav button{
       background: var(--color-red);
       color: var(--color-bg);    
 }
+
+
+/*=== Featured ===*/
+
+.featured{
+    margin-top: 8rem;
+}
+.featured__container{
+    display: grid;
+     grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+}
+
+.featured .post__thumbnail{
+    height: fit-content;
+}
