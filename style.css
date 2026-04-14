@@ -142,7 +142,18 @@ nav button{
     display: flex;
     flex-direction: column;
     box-shadow: 0 3rem 3rem rgba(0,0,0,0.4);
-    background: var(--color-gray-900);
+    visibility: hidden;
+    opacity: 0;
+    transition: var(--transition);
+    
+
+}
+
+/*shfaq nav ul kur profili nav eshte hover*/
+.nav__profile:hover> ul{
+    visibility: visible;
+    opacity: 1;
+
 }
 
 .nav__profile ul li a{
@@ -150,4 +161,8 @@ nav button{
     background: var(--color-gray-900);
     display: block;
     width: 100%;
+}
+.nav__profile ul li:last-child a {
+      background: var(--color-red);
+      color: var(--color-bg);    
 }
