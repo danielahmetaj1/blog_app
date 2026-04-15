@@ -347,24 +347,8 @@ footer ul a:hover{
     transition: var(--transition);
     color: var(--color-white);
 }
-/*===================stilizimi i single post=================*/
-.singlepost {
-    margin: 6rem 0 2rem;
-}
 
-.singlepost__container {
-    width: var(--form-width);
-    background:var(--color-gray-900);
-    padding:1rem 2rem 3rem;
-}
-.singlepost__thumbnail{
-    maatgin-top: 1.5rem 0 1rem;
 
-}
-.singlepost__container p {
-    margin-top: 1rem;
-    line-height: 1.7;
-}
 
 
 /*====== media queries */
@@ -465,9 +449,33 @@ footer ul a:hover{
     margin-left: 2rem;
     border: 0;
 }
-/*==================single post ==============*/
-.singlepost{
-    background-color: transparent;
-    padding: 0;
 }
+/*===================stilizimi i single post=================*/
+.singlepost {
+    margin: 6rem 0 2rem;
 }
+
+.singlepost__container {
+    width: var(--form-width);
+    background:var(--color-gray-900);
+    padding:1rem 2rem 3rem;
+}
+.singlepost__thumbnail{
+    margin-top: 1.5rem 0 1rem;
+
+}
+.singlepost__container p {
+    margin-top: 1rem;
+    line-height: 1.7;
+}
+
+
+/* ==media queries per small devices== */
+ @media screen and (max-width: 600px){
+    section{
+        margin-top: 2rem;
+    }
+    h1{
+        font-size: 2rem;
+    }
+ }
