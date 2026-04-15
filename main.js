@@ -1,6 +1,6 @@
 const navItems = document.querySelector('.nav__items');
-const openNavBtn = document.querySelector('#nav_open-btn');
-const closeNavBtn = document.querySelector('#nav_close-btn');
+const openNavBtn = document.querySelector('#open_nav-btn');
+const closeNavBtn = document.querySelector('#close_nav-btn');
 //hapja e nav menu
 const openNav= () => {
     navItems.style.display = 'flex';
