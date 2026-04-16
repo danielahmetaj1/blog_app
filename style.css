@@ -556,3 +556,10 @@ footer ul a:hover{
         width: 100%;
     }
  }
+
+ /*Empty page */
+ .empty__page{
+    height: 70vh;
+    display: grid;
+    place-content: center;
+ }
