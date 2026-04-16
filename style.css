@@ -618,3 +618,10 @@ display: block;
     padding: 0;
    }
  }
+
+ /*Empty page */
+ .empty__page{
+    height: 70vh;
+    display: grid;
+    place-content: center;
+ }
