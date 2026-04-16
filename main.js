@@ -5,14 +5,14 @@ const closeNavBtn = document.querySelector('#close_nav-btn');
 const openNav= () => {
     navItems.style.display = 'flex';
     openNavBtn.style.display = 'none';
-    closeNavBtn.style.display = 'inline-block'; 
+    closeNavBtn.style.display = 'block'; 
 
 }
 
 //mbyllja e nav menu
 const closeNav= () => {
     navItems.style.display = 'none';
-    openNavBtn.style.display = 'inline-block';
+    openNavBtn.style.display = 'block';
     closeNavBtn.style.display = 'none'; 
 
 }
