@@ -103,7 +103,6 @@ nav{
 
 nav button{
     display: none;
-
 }
 
 .nav__container{
@@ -550,6 +549,8 @@ transition: var(--transition);
         font-size: 0.8rem;
     }
     /*==Nav==*/
+
+    
  #open_nav-btn{
     position: absolute;
     top: 50%;

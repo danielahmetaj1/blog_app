@@ -1,81 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
+include 'partials/header.php';
+?>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WriteX Blog</title>
-    <!-- Stilizim custom-->
-    <link rel="stylesheet" href="./style.css">
-    <!--Ikona -->
-    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.2.0/css/line.css">
-    <!-- Google font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-        rel="stylesheet">
-</head>
 
-<body>
-    <nav>
-        <div class="container nav__container">
-            <a href="index.html" class="nav__logo">WriteX</a>
-            <ul class="nav__items">
-                
-                <li><a href="blog.html">Blog</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="services.html">Services</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                <!--<li><a href="signin.html">Sign In</a></li> -->
-                <li class="nav__profile">
-                    <div class="avatar">
-                        <img src="./images/avatar1.png" alt="">
-                    </div>
-                    <ul>
-                        <li><a href="dashboard.html">Dashboard</a></li>
-                        <li><a href="logout.html">Logout</a></li>
-                    </ul>
-
-                </li>
-            </ul>
-            <button id="close_nav-btn" aria-label="Close navigation menu"><i class="uil uil-multiply"
-                        aria-hidden="true"></i></button>
-            <button id="open_nav-btn" aria-label="Open navigation menu"><i class="uil uil-bars"
-                    aria-hidden="true"></i></button>
-        </div>
-        <!--fund i navit-->
-        </nav>
-
-    <section class="featured">
-        <div class="container featured__container">
-            <div class="post_thumbnail">
-                <img src="./images/blog1.jpeg" alt="Featured blog post thumbnail">
+    <!--=============fillimi i search =================-->
+    <section class="search__bar">
+        <form class="container search__bar-contaainer" action="">
+            <div>
+                <i class="uil uil-search"></i>
+                <input type="search" name="" placeholder="Search">
             </div>
-            <div class="post_info">
-                <a href="" class="category__button">Wild Life</a>
-                <h2 class="post__title"><a href="post.html">Lorem ipsum dolor sit amet</a></h2>
-                <p class="post__body">
-                    Lorem ipsum dolor si
-                    t amet, consectetur adipisicing elit. Similique, dolorem? Ad repellendus corp
-                    oris eveniet ea exercitationem laboriosam consequatur culpa ut quis ex aliquam vo
-                    luptates architecto quasi, necessitatibus incidunt sint? Molestiae?
-
-                </p>
-                <div class="post__author">
-                    <div class="post__author-avatar">
-                        <img src="./images/avatar2.jpg" alt="">
-                    </div>
-                    <div class="post__author-info">
-                        <h5>By: John Doe</h5>
-                        <small>June 10, 2024 - 10:00</small>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+            <button type="submit" class="btn">Go</button>
+        </form>
     </section>
-    <!-- =============fundi i feature post=========-->
-
+<!--==========Fundi i search ===============-->
 
 
     <section class="posts">
@@ -254,68 +192,6 @@
     <!---Perfundimi i kategorive te butonave-->
 
 
-    <footer>
-        <div class="footer__socials">
-            <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" title="Visit our Facebook page"><i class="uil uil-facebook-f"></i></a>
-            <a href="https://www.twitter.com/" target="_blank" rel="noopener noreferrer" title="Visit our Twitter page"><i class="uil uil-twitter"></i></a>
-            <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" title="Visit our Instagram page"><i class="uil uil-instagram"></i></a>
-            <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" title="Visit our LinkedIn page"><i class="uil uil-linkedin"></i></a>
-            <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer" title="Visit our YouTube channel"><i class="uil uil-youtube"></i></a>
-        </div>
-        <div class="container footer__container">
-            <article>
-                <h4>Categories</h4>
-                <ul>
-                    <li><a href="">Art</a></li>
-                    <li><a href="">Wild Life</a></li>
-                    <li><a href="">Travel</a></li>
-                    <li><a href="">Science & Technology</a></li>
-                    <li><a href="">Food</a></li>
-                    <li><a href="">Music</a></li>
-                </ul>
-            </article>
-            <article>
-                <h4>Support</h4>
-                <ul>
-                    <li><a href="">Online support</a></li>
-                    <li><a href="">Call numbers</a></li>
-                    <li><a href="">Email support</a></li>
-                    <li><a href="">Social support</a></li>
-                    <li><a href="">Location</a></li>
-
-                </ul>
-            </article>
-            <article>
-                <h4>Blog</h4>
-                <ul>
-                    <li><a href="">Safety</a></li>
-                    <li><a href="">Repair</a></li>
-                    <li><a href="">Recent</a></li>
-                    <li><a href="">Popular</a></li>
-                    <li><a href="">Categories</a></li>
-                </ul>
-            </article>
-            <article>
-                <h4>Permalinks</h4>
-                <ul>
-                    <li><a href="">Home</a></li>
-                    <li><a href="">Blog</a></li>
-                    <li><a href="">About</a></li>
-                    <li><a href="">Services</a></li>
-                    <li><a href="">Contact</a></li>
-                </ul>
-            </article>
-        </div>
-        <div class="footer__copyright">
-            <small>Copyright &copy; WriteX blog. All rights reserved.</small>
-        </div>
-    </footer>
-
-</section>
-<!-- =============fundi i feature post=========-->
-
-
- <script src="main.js"></script>
-</body>
-
-</html>
+<?php
+include 'partials/footer.php';
+?>
