@@ -32,4 +32,11 @@ const showSideBar = () => {
     showSidebarBtn.style.display = 'none';
     hideSidebarBtn.style.display = 'inline-block';
 }
+// mbyllja e sidebar
+const hideSideBar = () => { 
+    sidebar.style.left = '-100%';
+    showSidebarBtn.style.display = 'inline-block';
+    hideSidebarBtn.style.display = 'none';
+}
 showSidebarBtn.addEventListener('click',showSideBar );
+hideSidebarBtn.addEventListener('click',hideSideBar );
