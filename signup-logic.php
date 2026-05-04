@@ -95,10 +95,11 @@ require 'config/database.php';
             $_SESSION['signup-success'] = "Registration successful. Please sign in.";
             header('location: ' . ROOT_URL . 'signin.php');
             die();
+        }
     }
- }
- else{
+}
+else{
     //if button was not clicked, bounce back to signup page
     header('location: ' . ROOT_URL . 'signup.php');
     die();
- }
+}
