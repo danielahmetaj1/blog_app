@@ -23,22 +23,28 @@ require 'config/constants.php';
 
 <body>
 
-<section class="form__section">
-    <div class="container form__section-container">
-        <h2>Sign In</h2>
-        <div class="alert__message success">
-            <p>These is an success message</p>
+    <section class="form__section">
+        <div class="container form__section-container">
+            <h2>Sign In</h2>
+            <?php if (isset ($_SESSION['signup-success'])) : ?>
+                <div class="alert__message success">
+                    <p>
+                        <?= $_SESSION['signup-success'];
+                        unset($_SESSION['signup-success']);
+                        ?>
+                    </p>
+                </div>
+            <?php endif ?>
+            <form action="<?= ROOT_URL ?>signin-logic.php" method="POST">
+                <input type="text" name="username_email" placeholder="Username or Email">
+                <input type="password" name="password" placeholder="Password">
+                <button type="submit" name="submit" class="btn">Sign In</button>
+                <small>Don't have an account? <a href="signup.php"> Sign up</a> </small>
+            </form>
+
         </div>
-        <form action="">
-            <input type="text" placeholder="Username or Email">
-            <input type="password" placeholder="Password">
-            <button type="submit" class="btn">Sign In</button>
-            <small>Don't have an account? <a href="signup.php"> Sign up</a> </small>
-
-        </form>
-
-    </div>
-</section>
+    </section>
 
 </body>
+
 </html>
