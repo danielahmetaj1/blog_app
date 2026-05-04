@@ -21,7 +21,7 @@ if (isset($_POST['submit'])) {
             //verifiko passwordin me passwordin e hash-uar ne databaze
             if (password_verify($password, $db_password)) {
                 //ruaj id e perdoruesit ne session
-                $_SESSION['user-id'] = $user_record['id'];
+                $_SESSION['user_id'] = $user_record['id'];
                 // vendos session nese user eshte admin
                 if ($user_record['role'] == 'admin') {
                     $_SESSION['user_is_admin'] = true;
