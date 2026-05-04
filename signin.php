@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WriteX Blog</title>
     <!-- Stilizim custom-->
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./css/style.css">
     <!--Ikona -->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.2.0/css/line.css">
     <!-- Google font -->
@@ -28,7 +28,7 @@
             <input type="text" placeholder="Username or Email">
             <input type="password" placeholder="Password">
             <button type="submit" class="btn">Sign In</button>
-            <small>Don't have an account? <a href="signup.html">Sign up</a></small>
+            <small>Don't have an account? <a href="signup.php"> Sign up</a> </small>
 
         </form>
 
