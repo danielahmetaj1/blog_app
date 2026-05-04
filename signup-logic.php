@@ -86,7 +86,7 @@ require 'config/database.php';
         //insert new user into users table
         $insert_user_query = "INSERT INTO users SET firstname='$firstname', 
         lastname='$lastname', username='$username', email='$email', password='$hashed_password', 
-        avatar='$avatar_name', is_admin=0";
+        role='author', avatar='$avatar_name' ";
         $insert_user_result = mysqli_query($connection, $insert_user_query);
 
         $insert_user_result = mysqli_query($connection, $insert_user_query);

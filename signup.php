@@ -43,7 +43,7 @@
             
              </div>
        <?php endif ?>
-        <form action="<?=ROOT_URL ?>signup-logic.php" enctype="multipart/form-data" memthod="POST">
+        <form action="<?=ROOT_URL ?>signup-logic.php" enctype="multipart/form-data" method="POST">
             <input type="text" name="firstname" value="<?= $firstname ?>" placeholder="First Name">
             <input type="text" name="lastname" value="<?= $lastname ?>" placeholder="Last Name">
             <input type="text" name="username" value="<?= $username ?>" placeholder="Username">
