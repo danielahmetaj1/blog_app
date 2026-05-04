@@ -1,8 +1,8 @@
-  <?php
+ <?php
 include 'partials/header.php';
 //fetch users from database but not current user
- $current_admin_id = $_SESSION['user_id'];
- $query = "SELECT * FROM users WHERE NOT id=$current_admin_id";
+ $current_admin_id = (int) $_SESSION['user-id'];
+ $query = "SELECT * FROM users WHERE NOT user_id=$current_admin_id";
 $users = mysqli_query($connection, $query);
 ?>
 
@@ -75,10 +75,10 @@ $users = mysqli_query($connection, $query);
                 <tr>
                     <td><?= "{$user['firstname']} {$user['lastname']}"?></td> 
                      <td><?= $user['username'] ?></td>
-                    <td><a href="<?= ROOT_URL ?>admin/edit-user.php?id=<?= $user['id'] ?>" class="btn sm">Edit</a></td>
-                    <td><a href="<?= ROOT_URL ?>admin/delete-user.php?id=<?= $user['id'] ?>" class="btn sm danger">
+                    <td><a href="<?= ROOT_URL ?>admin/edit-user.php?id=<?= $user['user_id'] ?>" class="btn sm">Edit</a></td>
+                    <td><a href="<?= ROOT_URL ?>admin/delete-user.php?id=<?= $user['user_id'] ?>" class="btn sm danger">
                         Delete</a></td>
-                     <td><?=  $user['role'] ? 'admin' : 'author' ?></td> 
+                     <td><?=  $user['role'] === 'admin' ? 'admin' : 'author' ?></td> 
                 </tr>
                 <?php endwhile ?>
             </tbody>

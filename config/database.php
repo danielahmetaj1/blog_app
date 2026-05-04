@@ -1,5 +1,5 @@
 <?php
-require 'config/constants.php';
+require_once __DIR__ . '/constants.php';
 
 
 //lidhja me databaze

@@ -10,7 +10,8 @@ require 'config/database.php';
     $email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
     $createpassword = filter_var($_POST['createpassword'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $confirmpassword = filter_var($_POST['confirmpassword'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-    $is_admin = filter_var($_POST['userrole'], FILTER_SANITIZE_NUMBER_INT);  
+    $is_admin = filter_var($_POST['userrole'], FILTER_SANITIZE_NUMBER_INT);
+    $role = ((int) $is_admin === 1) ? 'admin' : 'author';
     $avatar = $_FILES['avatar'];
     
 
@@ -90,12 +91,12 @@ require 'config/database.php';
         //insert new user into users table
         $insert_user_query = "INSERT INTO users SET firstname='$firstname', 
         lastname='$lastname', username='$username', email='$email', password='$hashed_password', 
-        role='author', avatar='$avatar_name', is_admin='$is_admin' ";
+        role='$role', avatar='$avatar_name' ";
         $insert_user_result = mysqli_query($connection, $insert_user_query);
         if(!mysqli_errno($connection)){
             //redirect to signin page with success message
             $_SESSION['add-user-success'] = "Registration successful. Please sign in.";
-            header('location: ' . ROOT_URL . 'admin/manage-user.php');
+            header('location: ' . ROOT_URL . 'admin/manage-users.php');
             die();
         }
     }

@@ -1,8 +1,10 @@
 <?php
-require '../partials/header.php';
+require_once __DIR__ . '/../../config/constants.php';
 
-// kontrollon statusin e s
-if(isset($_SESSION['user-id'])){
-    header('location: ' . ROOT_URL . 'singin.php');
+if (!isset($_SESSION['user-id'])) {
+    $_SESSION['signin'] = 'Please sign in to access the dashboard.';
+    header('location: ' . ROOT_URL . 'signin.php');
     die();
 }
+
+require __DIR__ . '/../../partials/header.php';
