@@ -9,7 +9,7 @@ $users = mysqli_query($connection, $query);
 
 
 <section class="dashboard">
-    <?php if(isset($_SESSION['add-user-success'])): ?> //nese user u shtua me sukses
+    <?php if(isset($_SESSION['add-user-success']))://nese user u shtua me sukses ?> 
                 <div class="alert__message success container">
                     <p>
                         <?= $_SESSION['add-user-success'];
@@ -17,7 +17,7 @@ $users = mysqli_query($connection, $query);
                         ?>
                     </p>
                 </div>
-                <?php elseif(isset($_SESSION['edit-user-success'])): ?> //nese user u perditsua me sukses
+                <?php elseif(isset($_SESSION['edit-user-success']))://nese user u perditsua me sukses ?> 
                 <div class="alert__message success container">
                     <p>
                         <?= $_SESSION['edit-user-success'];
@@ -25,7 +25,7 @@ $users = mysqli_query($connection, $query);
                         ?>
                     </p>
                 </div>
-                <?php elseif(isset($_SESSION['edit-user'])): ?> //nese user nuk u perditsua me sukses
+                <?php elseif(isset($_SESSION['edit-user']))://nese user nuk u perditsua me sukses ?> 
                 <div class="alert__message error container">
                     <p>
                         <?= $_SESSION['edit-user'];
