@@ -28,9 +28,9 @@ if (isset($_POST['submit'])) {
                 }
                 //login user
                 header('location: ' . ROOT_URL . 'admin/');
-            }else {
-            $_SESSION['signin'] = "Ju lutem kontrolloni inputet";
-        }
+            } else {
+                $_SESSION['signin'] = "Ju lutem kontrolloni inputet";
+            }
         } else {
             $_SESSION['signin'] = "Username ose email nuk ekziston";
         }
