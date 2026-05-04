@@ -1,9 +1,9 @@
 <?php 
 require 'config/database.php';
 
-//get signup form data if signup button was clicked
+//merrni te dhenat e formularit te regjistrimit nese butoni i regjistrimit u shtypet
  if(isset($_POST['submit'])){
-    //get form data
+    //merrni te dhanat e formularit
     $firstname = filter_var($_POST['firstname'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $lastname = filter_var($_POST['lastname'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $username = filter_var($_POST['username'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -13,7 +13,7 @@ require 'config/database.php';
     $avatar = $_FILES['avatar'];
     
 
-    //validate input values
+    //kontrolloni vlerat e hyrjes
     if(!$firstname){
         $_SESSION['signup'] = "Please enter your First Name";
     }
@@ -33,36 +33,36 @@ require 'config/database.php';
         $_SESSION['signup'] = "Please select an Avatar";
     }
     else{
-        //check if passwords don't match
+        //kontrolloni nese fjalekalimet nuk perputhen
         if($createpassword !== $confirmpassword){
             $_SESSION['signup'] = "Passwords do not match";
         }
         else{
-            //hash password
+            //hash-oj fjalekalimet
             $hashed_password = password_hash($createpassword, PASSWORD_DEFAULT);
              
-            //check if username or email already exists in the database
-            $user_check_query = "SELECT * FROM users WHERE username='$username' OR email='$email'";
+            //kontrolloni nese emri i perdoruesit ose emaili ekziston ne bazin e te dhenave
+            $user_check_query = "SELECT * FROM users WHERE username='$username' OR email='$email";
             $user_check_result = mysqli_query($connection, $user_check_query);
             if(mysqli_num_rows($user_check_result) > 0){
                 $_SESSION['signup'] = "Username or Email already exists";
             }
             else{
-                //WORK ON AVATAR
-                //rename avatar
-                $time = time(); //make each image name unique using current timestamp
+                //PUNO ME AVATAR
+                //riemertoni avatarin
+                $time = time(); //beni cdo emer imazhi unik duke perdorur kohen e tashme
                 $avatar_name = $time . $avatar['name'];
                 $avatar_tmp_name = $avatar['tmp_name'];
                 $avatar_destination_path = 'images/' . $avatar_name;
 
-                //make sure file is an image
+                //sigurohuni qe skedari eshte nje imazh
                 $allowed_files = ['png', 'jpg', 'jpeg'];
                 $extension = explode('.', $avatar_name);
                 $extension = end($extension);
                 if(in_array($extension, $allowed_files)){
-                    //make sure image is not too large (1mb+)
+                    //sigurohuni qe imazhi nuk eshte shume i madh (1mb+)
                     if($avatar['size'] < 1000000){
-                        //upload avatar
+                        //ngarko avatarin
                         move_uploaded_file($avatar_tmp_name, $avatar_destination_path);
                     }
                     else{
@@ -75,21 +75,21 @@ require 'config/database.php';
             }
         }
     }
-    //redirect back to signup page if there was an error
+    //ridrejtoni mbrapa ne faqen e regjistrimit nese ka nje gabim
     if(isset($_SESSION['signup'])){
-        //pass form data back to signup page
+        //kaloni te dhanat e formularit mbrapa ne faqen e regjistrimit
         $_SESSION['signup-data'] = $_POST;
         header('location: ' . ROOT_URL . 'signup.php');
         die();
     }
     else{
-        //insert new user into users table
+        //futni perdoruesin e ri ne tabelen e perdoruesve
         $insert_user_query = "INSERT INTO users SET firstname='$firstname', 
         lastname='$lastname', username='$username', email='$email', password='$hashed_password', 
         role='author', avatar='$avatar_name' ";
         $insert_user_result = mysqli_query($connection, $insert_user_query);
         if(!mysqli_errno($connection)){
-            //redirect to signin page with success message
+            //ridrejtoni ne faqen e hyrjes me nje mesazh suksesi
             $_SESSION['signup-success'] = "Registration successful. Please sign in.";
             header('location: ' . ROOT_URL . 'signin.php');
             die();
@@ -97,7 +97,7 @@ require 'config/database.php';
     }
 }
 else{
-    //if button was not clicked, bounce back to signup page
+    //nese butoni nuk u shtypet, kthehu mbrapa ne faqen e regjistrimit
     header('location: ' . ROOT_URL . 'signup.php');
     die();
 }
