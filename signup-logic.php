@@ -88,8 +88,6 @@ require 'config/database.php';
         lastname='$lastname', username='$username', email='$email', password='$hashed_password', 
         role='author', avatar='$avatar_name' ";
         $insert_user_result = mysqli_query($connection, $insert_user_query);
-
-        $insert_user_result = mysqli_query($connection, $insert_user_query);
         if(!mysqli_errno($connection)){
             //redirect to signin page with success message
             $_SESSION['signup-success'] = "Registration successful. Please sign in.";
