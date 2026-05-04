@@ -32,9 +32,8 @@ include 'partials/header.php';
             <button type="submit" class="btn">Postoje</button>
         </form>
 
-    </div>
+    </div> 
 </section>
-
 <?php 
 include '../partials/footer.php';
 ?>
