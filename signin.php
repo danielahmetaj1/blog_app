@@ -33,7 +33,7 @@ require 'config/constants.php';
             <input type="text" placeholder="Username or Email">
             <input type="password" placeholder="Password">
             <button type="submit" class="btn">Sign In</button>
-            <small>Don't have an account? <a href="signup.html">Sign up</a></small>
+            <small>Don't have an account? <a href="signup.php"> Sign up</a> </small>
 
         </form>
 
