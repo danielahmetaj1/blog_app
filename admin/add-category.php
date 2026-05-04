@@ -8,10 +8,11 @@ include 'partials/header.php';
         <div class="alert__message error">
             <p>Ky eshte nje mesazh gabimi</p>
         </div>
-        <form action="">
-            <input type="text" placeholder="Titulli">
-            <textarea rows="4" placeholder="Pershkrimi"></textarea>
-            <button type="submit">Shto Kategori</button>
+        <form action="<?= ROOT_URL ?> admin/add-category-logic.php" method="POST">
+            <input type="text" name="name" placeholder="Titulli">
+            <textarea rows="4" name="slug" placeholder="Pershkrimi"></textarea>
+            <textarea name="created_at" placeholder="Data e Krijimit"></textarea>
+            <button type="submit" name="submit" class="btn">Shto Kategori</button>
         </form>
 
     </div>
