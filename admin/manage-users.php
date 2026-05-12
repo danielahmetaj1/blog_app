@@ -9,7 +9,7 @@ $users = mysqli_query($connection, $query);
 
 
 <section class="dashboard">
-    <?php if(isset($_SESSION['add-user-success'])): ?> //nese user u shtua me sukses
+    <?php if(isset($_SESSION['add-user-success']))://nese user u shtua me sukses ?> 
                 <div class="alert__message success container">
                     <p>
                         <?= $_SESSION['add-user-success'];
@@ -17,7 +17,7 @@ $users = mysqli_query($connection, $query);
                         ?>
                     </p>
                 </div>
-                <?php elseif(isset($_SESSION['edit-user-success'])): ?> //nese user u perditsua me sukses
+                <?php elseif(isset($_SESSION['edit-user-success']))://nese user u perditsua me sukses ?> 
                 <div class="alert__message success container">
                     <p>
                         <?= $_SESSION['edit-user-success'];
@@ -25,11 +25,19 @@ $users = mysqli_query($connection, $query);
                         ?>
                     </p>
                 </div>
-                <?php elseif(isset($_SESSION['edit-user'])): ?> //nese user nuk u perditsua me sukses
+                <?php elseif(isset($_SESSION['edit-user']))://nese user nuk u perditsua me sukses ?> 
                 <div class="alert__message error container">
                     <p>
-                        <?= $_SESSION['edit-user'];
-                        unset($_SESSION['edit-user']);
+                        <?= $_SESSION['delete-user'];
+                        unset($_SESSION['delete-user']);
+                        ?>
+                    </p>
+                </div>
+                  <?php elseif(isset($_SESSION['delete-user-success']))://nese user u fshi me sukses ?> 
+                <div class="alert__message success container">
+                    <p>
+                        <?= $_SESSION['delete-user-success'];
+                        unset($_SESSION['delete-user-success']);
                         ?>
                     </p>
                 </div>

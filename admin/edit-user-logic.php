@@ -12,7 +12,7 @@ if(isset($_POST['submit'])){
         $_SESSION['edit-user'] = "Ju lutem jepni nje input valid";
     }else{
         // perditeso perdoruesin ne databaze
-        $query = "UPDATE users SET firstname='$firstname', lastname='$lastname', userrole='$is_admin' WHERE id=$id LIMIT 1";
+        $query = "UPDATE users SET firstname='$firstname', lastname='$lastname', role='$is_admin' WHERE user_id=$id LIMIT 1";
         $result = mysqli_query($connection, $query);
         if(mysqli_errno($connection)){
             $_SESSION['edit-user'] = " Ndodhi nje gabim ne perditesimin e perdoruesit";
