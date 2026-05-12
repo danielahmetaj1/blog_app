@@ -1,13 +1,15 @@
 <?php
 require 'config/database.php';
+
+ 
 if(isset($_POST['submit'])){
     //mer te dhenat e formes
-    $name = filter_var($_POST['name'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $title = filter_var($_POST['title'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $slug = filter_var($_POST['slug'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $created_at = filter_var($_POST['created_at'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
     //kontrolloni vlerat e hyrjes
-    if(!$name){
+    if(!$title){
         $_SESSION['add-category'] = "Ju lutem vendosni nje titull";
 
 }
@@ -25,15 +27,15 @@ if(isset($_POST['submit'])){
     }
     else{
         //shtoni kategorine ne databaze
-        $query = "INSERT INTO categories (title, slug, created_at) VALUES ('$name', '$slug', '$created_at')";
+        $query = "INSERT INTO categories (title, slug, created_at) VALUES ('$title', '$slug', '$created_at')";
         $result = mysqli_query($connection, $query);
-        if(!mysqli_errno($connection)){
+        if(mysqli_errno($connection)){
             $_SESSION['add-category'] = "Kategoria nuk mund te shtohet";
             header('location: ' . ROOT_URL . 'admin/add-category.php');
             die();
         }
         else{
-            $_SESSION['add-category-success'] = "Kategoria $name u shtua me sukses";
+            $_SESSION['add-category-success'] = "Kategoria $title u shtua me sukses";
             header('location: ' . ROOT_URL . 'admin/manage-categories.php');
             die();
         }
