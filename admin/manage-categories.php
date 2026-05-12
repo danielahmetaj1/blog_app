@@ -35,11 +35,19 @@ $categories = mysqli_query($connection,$query);
                         ?>
                     </p>
                 </div>
-                <?php elseif(isset($_SESSION['edit-category-success']))://nese fshirja e kategorisë u bë me sukses ?> 
+                <?php elseif(isset($_SESSION['edit-category-success']))://nese updatimi e kategorisë u bë me sukses ?> 
                 <div class="alert__message success container">
                     <p>
                         <?= $_SESSION['edit-category-success'];
                         unset($_SESSION['edit-category-success']);
+                        ?>
+                    </p>
+                </div>
+                   <?php elseif(isset($_SESSION['delete-category-success']))://nese fshirja e kategorisë u bë me sukses ?> 
+                <div class="alert__message success container">
+                    <p>
+                        <?= $_SESSION['delete-category-success'];
+                        unset($_SESSION['delete-category-success']);
                         ?>
                     </p>
                 </div>
