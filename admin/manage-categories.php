@@ -2,7 +2,7 @@
 include 'partials/header.php';
 
 //kaategoria  fetch nga databaza
-$query = "SELECT * FROM categories ORDER BY  name DESC";
+$query = "SELECT * FROM categories ORDER BY  title DESC";
 $categories = mysqli_query($connection,$query);
 ?>
 
@@ -83,7 +83,7 @@ $categories = mysqli_query($connection,$query);
                 <tbody>
                     <?php while($category = mysqli_fetch_assoc($categories)) : ?>
                     <tr>
-                        <td><?=  $category['name'] ?></td>
+                        <td><?=  $category['title'] ?></td>
                         <td><a href="<?= ROOT_URL ?>admin/edit-category.php?id=<?=  $category ['id']?>" class="btn sm">Edit</a></td>
                         <td><a href="<?= ROOT_URL ?>admin/delete-category.php?id=<?=  $category ['id']?>" class="btn sm danger">Delete</a></td>
                     </tr>    
