@@ -1,10 +1,33 @@
 <?php
 include 'partials/header.php';
+
+//kaategoria  fetch nga databaza
+$query = "SELECT * FROM categories ORDER BY  name DESC";
+$categories = mysqli_query($connection,$query);
 ?>
 
 
 
 <section class="dashboard">
+
+<?php if(isset($_SESSION['add-category-success']))://nese kategoria u shtua me sukses ?> 
+                <div class="alert__message success container">
+                    <p>
+                        <?= $_SESSION['add-category-success'];
+                        unset($_SESSION['add-category-success']);
+                        ?>
+                    </p>
+                </div>
+                
+ <?php elseif(isset($_SESSION['add-category']))://nese kategoria nuk u shtua me sukses ?> 
+                <div class="alert__message error container">
+                    <p>
+                        <?= $_SESSION['add-category'];
+                        unset($_SESSION['add-category']);
+                        ?>
+                    </p>
+                </div>
+                <?php endif ?>  
     <div class="container dashboard__container">
         <button id="show__sidebar-btn" class="sidebar__toggle"><i class="uil uil-angle-right-b"></i></button>
         <button id="hide__sidebar-btn" class="sidebar__toggle"><i class="uil uil-angle-left-b"></i></button>
@@ -48,6 +71,7 @@ include 'partials/header.php';
         </aside>
         <main>
             <h2>Manage Categories</h2>
+            <?php if(mysqli_num_rows($categories) > 0): ?>
             <table>
                 <thead>
                     <tr>
@@ -57,23 +81,20 @@ include 'partials/header.php';
                     </tr>
                 </thead>
                 <tbody>
+                    <?php while($category = mysqli_fetch_assoc($categories)) : ?>
                     <tr>
-                        <td>Travel</td>
-                        <td><a href="edit-category.php" class="btn sm">Edit</a></td>
-                        <td><a href="delete-category.php" class="btn sm danger">Delete</a></td>
-                    </tr>
-                    <tr>
-                        <td>Wild Life</td>
-                        <td><a href="edit-category.php" class="btn sm">Edit</a></td>
-                        <td><a href="delete-category.php" class="btn sm danger">Delete</a></td>
-                    </tr>
-                    <tr>
-                        <td>Music</td>
-                        <td><a href="edit-category.php" class="btn sm">Edit</a></td>
-                        <td><a href="delete-category.php" class="btn sm danger">Delete</a></td>
-                    </tr>
+                        <td><?=  $category['name'] ?></td>
+                        <td><a href="<?= ROOT_URL ?>admin/edit-category.php?id=<?=  $category ['id']?>" class="btn sm">Edit</a></td>
+                        <td><a href="<?= ROOT_URL ?>admin/delete-category.php?id=<?=  $category ['id']?>" class="btn sm danger">Delete</a></td>
+                    </tr>    
+                    <?php endwhile ?>         
                 </tbody>
             </table>
+            <?php else: ?>
+                <div class="alert__message error">
+                    <p>No categories found.</p>
+                </div>
+            <?php endif ?>
         </main>
     </div>
 </section>
