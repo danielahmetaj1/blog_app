@@ -33,7 +33,7 @@ $users = mysqli_query($connection, $query);
                         ?>
                     </p>
                 </div>
-                  <?php elseif(isset($_SESSION['delete-user-succes'])): ?> //nese user u fshi me sukses
+                  <?php elseif(isset($_SESSION['delete-user-success']))://nese user u fshi me sukses ?> 
                 <div class="alert__message success container">
                     <p>
                         <?= $_SESSION['delete-user-success'];
