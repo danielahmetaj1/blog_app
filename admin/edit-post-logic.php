@@ -8,24 +8,24 @@ if(isset($_POST['submit'])) {
     $previous_thumbnail_name = filter_var($_POST['previous_thumbnail_name'],FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $title = filter_var($_POST['title'],FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $category_id = filter_var($_POST['category'],FILTER_SANITIZE_NUMBER_INT);
-    $content = filter_var($_POST['content'],FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $body = filter_var($_POST['body'],FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $is_featured = filter_var($_POST['is_featured'],FILTER_SANITIZE_NUMBER_INT);
     $thumbnail = $_FILES['thumbnail'];
    
-    $is_featured = $is_featured == 1 ?: 0;
+    $is_featured = $is_featured ? 1 : 0;
 
     // kontrollojme nese te dhenat jane te plota
     if(!$title) {
         $_SESSION['edit-post'] = "Ju lutem vendosni nje titull per postin";
     }elseif(!$category_id) {
         $_SESSION['edit-post'] = "Ju lutem zgjidhni nje kategori per postin";
-    }elseif(!$content) {
-        $_SESSION['edit-post'] = "Ju lutem vendosni zhvillimin e postit";
+    }elseif(!$body) {
+        $_SESSION['edit-post'] = "Ju lutem vendosni nej pershkrim per postit";
     }else {        
         if($thumbnail['name']) {
             $previous_thumbnail_path = '../images/' . $previous_thumbnail_name;
 
-            if($previous_thumbnail_path) {
+            if(file_exists($previous_thumbnail_path)) {
                 unlink($previous_thumbnail_path);
             }
 
@@ -52,8 +52,8 @@ if(isset($_POST['submit'])) {
         }
     }
 
-    if($_SESSION['edit-post']) {
-        header('location: ' . ROOT_URL . 'admin/edit-post.php?id=' . $id);
+    if($_SESSION['edit-post']) { 
+        header('location: ' . ROOT_URL . 'admin/');
         die();
     }else{
         if($is_featured == 1) {
@@ -61,16 +61,14 @@ if(isset($_POST['submit'])) {
            $zero_all_is_featured_result = mysqli_query($connection, $zero_all_is_featured_query);
         }
         $thumbnail_to_insert = $thumbnail_name ?? $previous_thumbnail_name;
-        $query = "UPDATE posts SET title='$title', thumbnail='$thumbnail_to_insert', category_id=$category_id, content='$content', is_featured=$is_featured WHERE id=$id LIMIT 1";
+        $query = "UPDATE posts SET title='$title',  body='$body', thumbnail='$thumbnail_to_insert', category_id=$category_id, is_featured=$is_featured WHERE id=$id LIMIT 1";
         $result = mysqli_query($connection, $query);
     }
-    if(mysqli_errno($connection)) {
-        $_SESSION['edit-post'] = "Ndodhi nje gabim gjate perditesimit te postit";
-        header('location: ' . ROOT_URL . 'admin/edit-post.php?id=' . $id);
-        die();
+    if(!mysqli_errno($connection)) {
+        $_SESSION['edit-post-success'] = "Posti u perditesua me sukses";
+        unset($_SESSION['edit-post']);
     }
 }
-
     
 
 header('location: ' . ROOT_URL . 'admin/');
