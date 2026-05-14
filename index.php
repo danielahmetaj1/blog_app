@@ -1,21 +1,28 @@
 <?php
 include 'partials/header.php';
-
+//fetch postet qe jane featured
+$featured_query = "SELECT * FROM posts WHERE is_featured=1";
+$featured_result = mysqli_query($connection, $featured_query);
+$featured = mysqli_fetch_assoc($featured_result);
 ?>
+
+<?php if(mysqli_num_rows($featured_result)==1): ?>
     <section class="featured">
         <div class="container featured__container">
             <div class="post_thumbnail">
-                <img src="./images/blog1.jpeg" alt="Featured blog post thumbnail">
+                <img src="./images/<?= $featured['thumbnail'] ?>">
             </div>
             <div class="post_info">
-                <a href="" class="category__button">Wild Life</a>
-                <h2 class="post__title"><a href="post.html">Lorem ipsum dolor sit amet</a></h2>
+                <?php 
+                $category_id = $featured['category_id'];
+                $category_query = "SELECT * FROM categories WHERE id=$category_id";
+                $category_result = mysqli_query($connection, $category_query);
+                $category = mysqli_fetch_assoc($category_result);
+                ?>
+                <a href="<?= ROOT_URL ?>category-posts.php?id=<?= $category['id'] ?>" class="category__button"><?= $category['title'] ?></a>
+                <h2 class="post__title"><a href="post.html"><?= $featured['title'] ?></a></h2>
                 <p class="post__body">
-                    Lorem ipsum dolor si
-                    t amet, consectetur adipisicing elit. Similique, dolorem? Ad repellendus corp
-                    oris eveniet ea exercitationem laboriosam consequatur culpa ut quis ex aliquam vo
-                    luptates architecto quasi, necessitatibus incidunt sint? Molestiae?
-
+                 <?= substr($featured['body'], 0, 300) . '...' ?>
                 </p>
                 <div class="post__author">
                     <div class="post__author-avatar">
@@ -30,6 +37,7 @@ include 'partials/header.php';
         </div>
 
     </section>
+    <?php endif ?>
     <!-- =============fundi i feature post=========-->
 
 
