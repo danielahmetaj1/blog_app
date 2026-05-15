@@ -4,8 +4,13 @@ include 'partials/header.php';
 $featured_query = "SELECT * FROM posts WHERE is_featured=1";
 $featured_result = mysqli_query($connection, $featured_query);
 $featured = mysqli_fetch_assoc($featured_result);
-?>
 
+//bejme fetch 9 postet me te fundit
+$query = "SELECT * FROM posts ORDER BY created_at DESC LIMIT 9";
+$posts = mysqli_query($connection, $query);
+
+?>
+<!-- keto jane per featured postet nese ka-->
 <?php if(mysqli_num_rows($featured_result)==1): ?>
     <section class="featured">
         <div class="container featured__container">
@@ -14,23 +19,32 @@ $featured = mysqli_fetch_assoc($featured_result);
             </div>
             <div class="post_info">
                 <?php 
-                $category_id = $featured['category_id'];
+                $category_id = (int) $featured['category_id'];
                 $category_query = "SELECT * FROM categories WHERE id=$category_id";
                 $category_result = mysqli_query($connection, $category_query);
                 $category = mysqli_fetch_assoc($category_result);
                 ?>
-                <a href="<?= ROOT_URL ?>category-posts.php?id=<?= $category['id'] ?>" class="category__button"><?= $category['title'] ?></a>
-                <h2 class="post__title"><a href="post.html"><?= $featured['title'] ?></a></h2>
+                <a href="<?= ROOT_URL ?>category-posts.php?id=<?= $featured['category_id'] ?>" class="category__button"><?= $category['title'] ?></a>
+                <h2 class="post__title"><a href="<?= ROOT_URL ?>post.php?id=<?= $featured['id'] ?>"><?= $featured['title'] ?></a></h2>
                 <p class="post__body">
                  <?= substr($featured['body'], 0, 300) . '...' ?>
                 </p>
                 <div class="post__author">
+                    <?php 
+                    //bejme fetch te userit qe ka shkruar postin
+                    $user_id = (int) $featured['user_id'];
+                    $user_query = "SELECT * FROM users WHERE user_id=$user_id";
+                    $user_result = mysqli_query($connection, $user_query);
+                    $user = mysqli_fetch_assoc($user_result);
+                    ?>
                     <div class="post__author-avatar">
-                        <img src="./images/avatar2.jpg" alt="">
+                        <img src="./images/<?= $user['avatar'] ?>">
                     </div>
                     <div class="post__author-info">
-                        <h5>By: John Doe</h5>
-                        <small>June 10, 2024 - 10:00</small>
+                        <h5>By: <?= $user['username'] ?></h5>
+                        <small>
+                            <?= date('M d, Y - H:i', strtotime($featured['created_at'])) ?> 
+                        </small>
                     </div>
                 </div>
             </div>
@@ -42,177 +56,64 @@ $featured = mysqli_fetch_assoc($featured_result);
 
 
 
-    <section class="posts">
-        <div class="container posts__container">
-            <article class="post">
-                <div class="post__thumbnail">
-                    <img src="./images/blog2.jpeg" alt="Post Thumbnail">
-                </div>
-                <div class="post__info">
-                    <a href="" class="category__button">Wild Life</a>
-                    <h3 class="post__title">
-                        <a href="post.html">Lorem ipsum dolor sit amet</a>
-                    </h3>
-                    <p class="post__body">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Iure corporis placeat dolorem blanditiis ab molestias beatae voluptates
-                        consequuntur, hic corrupti quisquam totam illum minima eaque, tempore accusantium eum dolore
-                        ducimus!
-                    </p>
-                    <div class="post__author">
-                        <div class="post__author-avatar">
-                            <img src="./images/avatar3.jpg" alt="Author Avatar">
-                        </div>
-                        <div class="post__author-info">
-                            <h5>By: Jane Doe</h5>
-                            <small>June 12, 2024 - 14:30</small>
+        <section class="posts <?= $featured ? '' : 'section__extra-margin' ?> ">
+            <div class="container posts__container">
+                <?php while($post = mysqli_fetch_assoc($posts)): ?>
+                <article class="post">
+                    <div class="post__thumbnail">
+                        <img src="./images/<?= $post['thumbnail'] ?>" alt="Post Thumbnail">
+                    </div>
+                    <div class="post__info">
+                        <?php 
+                    $category_id = (int) $post['category_id'];
+                    $category_query = "SELECT * FROM categories WHERE id=$category_id";
+                    $category_result = mysqli_query($connection, $category_query);
+                    $category = mysqli_fetch_assoc($category_result);
+                    ?>
+                        <a href="<?= ROOT_URL ?>category-posts.php?id=<?= $post['category_id'] ?>" class="category__button"><?= $category['title'] ?></a>
+                        <h3 class="post__title">
+                            <a href="<?= ROOT_URL ?>post.php?id=<?= $post['id'] ?>"><?= $post['title'] ?></a>
+                        </h3>
+                        <p class="post__body">
+                        <?= substr($post['body'], 0, 150) . '...' ?>
+                        </p>
+                        <div class="post__author">
+                            <?php 
+                        //bejme fetch te userit qe ka shkruar postin
+                        $user_id = (int) $post['user_id'];
+                        $user_query = "SELECT * FROM users WHERE user_id=$user_id";
+                        $user_result = mysqli_query($connection, $user_query);
+                        $user = mysqli_fetch_assoc($user_result);
+                        ?>
+                            <div class="post__author-avatar">
+                                <img src="./images/<?= $user['avatar'] ?>" alt="Author Avatar">
+                            </div>
+                            <div class="post__author-info">
+                                <h5>By: <?= $user['username'] ?></h5>
+                                <small>
+                                    <?= date('M d, Y - H:i', strtotime($post['created_at'])) ?> 
+                                </small>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </article>
-            <article class="post">
-                <div class="post__thumbnail">
-                    <img src="./images/blog2.jpeg" alt="Post Thumbnail">
-                </div>
-                <div class="post__info">
-                    <a href="" class="category__button">Wild Life</a>
-                    <h3 class="post__title">
-                        <a href="post.html">Lorem ipsum dolor sit amet</a>
-                    </h3>
-                    <p class="post__body">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Iure corporis placeat dolorem blanditiis ab molestias beatae voluptates
-                        consequuntur, hic corrupti quisquam totam illum minima eaque, tempore accusantium eum dolore
-                        ducimus!
-                    </p>
-                    <div class="post__author">
-                        <div class="post__author-avatar">
-                            <img src="./images/avatar3.jpg" alt="Author Avatar">
-                        </div>
-                        <div class="post__author-info">
-                            <h5>By: Jane Doe</h5>
-                            <small>June 12, 2024 - 14:30</small>
-                        </div>
-                    </div>
-                </div>
-            </article>
-            <article class="post">
-                <div class="post__thumbnail">
-                    <img src="./images/blog2.jpeg" alt="Post Thumbnail">
-                </div>
-                <div class="post__info">
-                    <a href="" class="category__button">Wild Life</a>
-                    <h3 class="post__title">
-                        <a href="post.html">Lorem ipsum dolor sit amet</a>
-                    </h3>
-                    <p class="post__body">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Iure corporis placeat dolorem blanditiis ab molestias beatae voluptates
-                        consequuntur, hic corrupti quisquam totam illum minima eaque, tempore accusantium eum dolore
-                        ducimus!
-                    </p>
-                    <div class="post__author">
-                        <div class="post__author-avatar">
-                            <img src="./images/avatar3.jpg" alt="Author Avatar">
-                        </div>
-                        <div class="post__author-info">
-                            <h5>By: Jane Doe</h5>
-                            <small>June 12, 2024 - 14:30</small>
-                        </div>
-                    </div>
-                </div>
-            </article>
-            <article class="post">
-                <div class="post__thumbnail">
-                    <img src="./images/blog2.jpeg" alt="Post Thumbnail">
-                </div>
-                <div class="post__info">
-                    <a href="" class="category__button">Wild Life</a>
-                    <h3 class="post__title">
-                        <a href="post.html">Lorem ipsum dolor sit amet</a>
-                    </h3>
-                    <p class="post__body">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Iure corporis placeat dolorem blanditiis ab molestias beatae voluptates
-                        consequuntur, hic corrupti quisquam totam illum minima eaque, tempore accusantium eum dolore
-                        ducimus!
-                    </p>
-                    <div class="post__author">
-                        <div class="post__author-avatar">
-                            <img src="./images/avatar3.jpg" alt="Author Avatar">
-                        </div>
-                        <div class="post__author-info">
-                            <h5>By: Jane Doe</h5>
-                            <small>June 12, 2024 - 14:30</small>
-                        </div>
-                    </div>
-                </div>
-            </article>
-            <article class="post">
-                <div class="post__thumbnail">
-                    <img src="./images/blog2.jpeg" alt="Post Thumbnail">
-                </div>
-                <div class="post__info">
-                    <a href="" class="category__button">Wild Life</a>
-                    <h3 class="post__title">
-                        <a href="post.html">Lorem ipsum dolor sit amet</a>
-                    </h3>
-                    <p class="post__body">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Iure corporis placeat dolorem blanditiis ab molestias beatae voluptates
-                        consequuntur, hic corrupti quisquam totam illum minima eaque, tempore accusantium eum dolore
-                        ducimus!
-                    </p>
-                    <div class="post__author">
-                        <div class="post__author-avatar">
-                            <img src="./images/avatar3.jpg" alt="Author Avatar">
-                        </div>
-                        <div class="post__author-info">
-                            <h5>By: Jane Doe</h5>
-                            <small>June 12, 2024 - 14:30</small>
-                        </div>
-                    </div>
-                </div>
-            </article>
-            <article class="post">
-                <div class="post__thumbnail">
-                    <img src="./images/blog2.jpeg" alt="Post Thumbnail">
-                </div>
-                <div class="post__info">
-                    <a href="" class="category__button">Wild Life</a>
-                    <h3 class="post__title">
-                        <a href="post.html">Lorem ipsum dolor sit amet</a>
-                    </h3>
-                    <p class="post__body">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Iure corporis placeat dolorem blanditiis ab molestias beatae voluptates
-                        consequuntur, hic corrupti quisquam totam illum minima eaque, tempore accusantium eum dolore
-                        ducimus!
-                    </p>
-                    <div class="post__author">
-                        <div class="post__author-avatar">
-                            <img src="./images/avatar3.jpg" alt="Author Avatar">
-                        </div>
-                        <div class="post__author-info">
-                            <h5>By: Jane Doe</h5>
-                            <small>June 12, 2024 - 14:30</small>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        </div>
-    </section>
+                </article>
+            <?php endwhile ?>
+            </div>
+        </section>
     <!-- =============fundi i postimeve=========-->
 
     <!-- =============kategorite e butonave=====-->
     <section class="category__buttons">
         <div class="container category__buttons-container">
-            <a href="" class="category__button">Art</a>
-            <a href="" class="category__button">Wild Life</a>
-            <a href="" class="category__button">Travel</a>
-            <a href="" class="category__button">Science & Technology</a>
-            <a href="" class="category__button">Food</a>
-            <a href="" class="category__button">Music</a>
+            <?php 
+            $all_categories_query = "SELECT * FROM categories";
+            $all_categories_result = mysqli_query($connection, $all_categories_query);
+            ?> 
+            <?php while($category = mysqli_fetch_assoc($all_categories_result)): ?>
+             <a href="<?= ROOT_URL ?>category-posts.php?id=<?= $category['id'] ?>" class="category__button"><?= $category['title'] ?></a>
+
+            <?php endwhile ?>
+    
         </div>
     </section>
     <!---Perfundimi i kategorive te butonave-->

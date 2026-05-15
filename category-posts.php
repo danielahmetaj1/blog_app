@@ -1,222 +1,98 @@
 <?php
 include 'partials/header.php';
+
+//bejme fetch  nese id eshte i vendosur ne url
+if(isset($_GET['id'])){
+    $id = (int) filter_var($_GET['id'], FILTER_SANITIZE_NUMBER_INT);
+    $query = "SELECT * FROM categories WHERE id=$id";
+    $result = mysqli_query($connection, $query);
+
+    $posts_query = "SELECT * FROM posts WHERE category_id=$id ORDER BY created_at DESC";
+    $posts = mysqli_query($connection, $posts_query);
+}
+else{
+    header('location: ' . ROOT_URL . 'blog.php');
+    die();
+}
+
 ?>
 
 <header class="category__title">
-<h2>Category Title </h2>
+   <h2>
+    <?php 
+                $category_id = $id;
+                $category_query = "SELECT * FROM categories WHERE id=$id";
+                $category_result = mysqli_query($connection, $category_query);
+                $category = mysqli_fetch_assoc($category_result);
+                echo $category['title'];
+                ?>
+   </h2>
 </header>
 <!-- fundi category title-->
  
-
+<?php if(mysqli_num_rows($posts)>0 ): ?>
 <section class="posts">
         <div class="container posts__container">
+            <?php while($post = mysqli_fetch_assoc($posts)): ?>
             <article class="post">
                 <div class="post__thumbnail">
-                    <img src="./images/blog2.jpeg" alt="Post Thumbnail">
+                    <img src="./images/<?= $post['thumbnail'] ?>" alt="Post Thumbnail">
                 </div>
                 <div class="post__info">
-                    <a href="" class="category__button">Wild Life</a>
-                    <h3 class="post__title">
-                        <a href="post.html">Lorem ipsum dolor sit amet</a>
+                  
+                <h3 class="post__title">
+                        <a href="<?= ROOT_URL ?>post.php?id=<?= $post['id'] ?>"><?= $post['title'] ?></a>
                     </h3>
                     <p class="post__body">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Iure corporis placeat dolorem blanditiis ab molestias beatae voluptates
-                        consequuntur, hic corrupti quisquam totam illum minima eaque, tempore accusantium eum dolore
-                        ducimus!
+                    <?= substr($post['body'], 0, 150) . '...' ?>
                     </p>
                     <div class="post__author">
+                        <?php 
+                    //bejme fetch te userit qe ka shkruar postin
+                    $user_id = (int) $post['user_id'];
+                    $user_query = "SELECT * FROM users WHERE user_id=$user_id";
+                    $user_result = mysqli_query($connection, $user_query);
+                    $user = mysqli_fetch_assoc($user_result);
+                    ?>
                         <div class="post__author-avatar">
-                            <img src="./images/avatar3.jpg" alt="Author Avatar">
+                            <img src="./images/<?= $user['avatar'] ?>" alt="Author Avatar">
                         </div>
                         <div class="post__author-info">
-                            <h5>By: Jane Doe</h5>
-                            <small>June 12, 2024 - 14:30</small>
+                             <h5>By: <?= $user['username'] ?></h5>
+                            <small>
+                                 <?= date('M d, Y - H:i', strtotime($post['created_at'])) ?> 
+                            </small>
                         </div>
                     </div>
                 </div>
             </article>
-            <article class="post">
-                <div class="post__thumbnail">
-                    <img src="./images/blog2.jpeg" alt="Post Thumbnail">
-                </div>
-                <div class="post__info">
-                    <a href="" class="category__button">Wild Life</a>
-                    <h3 class="post__title">
-                        <a href="post.html">Lorem ipsum dolor sit amet</a>
-                    </h3>
-                    <p class="post__body">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Iure corporis placeat dolorem blanditiis ab molestias beatae voluptates
-                        consequuntur, hic corrupti quisquam totam illum minima eaque, tempore accusantium eum dolore
-                        ducimus!
-                    </p>
-                    <div class="post__author">
-                        <div class="post__author-avatar">
-                            <img src="./images/avatar3.jpg" alt="Author Avatar">
-                        </div>
-                        <div class="post__author-info">
-                            <h5>By: Jane Doe</h5>
-                            <small>June 12, 2024 - 14:30</small>
-                        </div>
-                    </div>
-                </div>
-            </article>
-            <article class="post">
-                <div class="post__thumbnail">
-                    <img src="./images/blog2.jpeg" alt="Post Thumbnail">
-                </div>
-                <div class="post__info">
-                    <a href="" class="category__button">Wild Life</a>
-                    <h3 class="post__title">
-                        <a href="post.html">Lorem ipsum dolor sit amet</a>
-                    </h3>
-                    <p class="post__body">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Iure corporis placeat dolorem blanditiis ab molestias beatae voluptates
-                        consequuntur, hic corrupti quisquam totam illum minima eaque, tempore accusantium eum dolore
-                        ducimus!
-                    </p>
-                    <div class="post__author">
-                        <div class="post__author-avatar">
-                            <img src="./images/avatar3.jpg" alt="Author Avatar">
-                        </div>
-                        <div class="post__author-info">
-                            <h5>By: Jane Doe</h5>
-                            <small>June 12, 2024 - 14:30</small>
-                        </div>
-                    </div>
-                </div>
-            </article>
-            <article class="post">
-                <div class="post__thumbnail">
-                    <img src="./images/blog2.jpeg" alt="Post Thumbnail">
-                </div>
-                <div class="post__info">
-                    <a href="" class="category__button">Wild Life</a>
-                    <h3 class="post__title">
-                        <a href="post.html">Lorem ipsum dolor sit amet</a>
-                    </h3>
-                    <p class="post__body">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Iure corporis placeat dolorem blanditiis ab molestias beatae voluptates
-                        consequuntur, hic corrupti quisquam totam illum minima eaque, tempore accusantium eum dolore
-                        ducimus!
-                    </p>
-                    <div class="post__author">
-                        <div class="post__author-avatar">
-                            <img src="./images/avatar3.jpg" alt="Author Avatar">
-                        </div>
-                        <div class="post__author-info">
-                            <h5>By: Jane Doe</h5>
-                            <small>June 12, 2024 - 14:30</small>
-                        </div>
-                    </div>
-                </div>
-            </article>
-            <article class="post">
-                <div class="post__thumbnail">
-                    <img src="./images/blog2.jpeg" alt="Post Thumbnail">
-                </div>
-                <div class="post__info">
-                    <a href="" class="category__button">Wild Life</a>
-                    <h3 class="post__title">
-                        <a href="post.html">Lorem ipsum dolor sit amet</a>
-                    </h3>
-                    <p class="post__body">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Iure corporis placeat dolorem blanditiis ab molestias beatae voluptates
-                        consequuntur, hic corrupti quisquam totam illum minima eaque, tempore accusantium eum dolore
-                        ducimus!
-                    </p>
-                    <div class="post__author">
-                        <div class="post__author-avatar">
-                            <img src="./images/avatar3.jpg" alt="Author Avatar">
-                        </div>
-                        <div class="post__author-info">
-                            <h5>By: Jane Doe</h5>
-                            <small>June 12, 2024 - 14:30</small>
-                        </div>
-                    </div>
-                </div>
-            </article>
-            <article class="post">
-                <div class="post__thumbnail">
-                    <img src="./images/blog2.jpeg" alt="Post Thumbnail">
-                </div>
-                <div class="post__info">
-                    <a href="" class="category__button">Wild Life</a>
-                    <h3 class="post__title">
-                        <a href="post.html">Lorem ipsum dolor sit amet</a>
-                    </h3>
-                    <p class="post__body">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Iure corporis placeat dolorem blanditiis ab molestias beatae voluptates
-                        consequuntur, hic corrupti quisquam totam illum minima eaque, tempore accusantium eum dolore
-                        ducimus!
-                    </p>
-                    <div class="post__author">
-                        <div class="post__author-avatar">
-                            <img src="./images/avatar3.jpg" alt="Author Avatar">
-                        </div>
-                        <div class="post__author-info">
-                            <h5>By: Jane Doe</h5>
-                            <small>June 12, 2024 - 14:30</small>
-                        </div>
-                    </div>
-                </div>
-            </article>
+           <?php endwhile ?>
         </div>
     </section>
+<?php else: ?>
+    <div class="alert__message error lg">
+        <p>Nuk u gjend asnje postim per kete kategori.</p>
+    </div>
+<?php endif ?>
     <!-- =============fundi i postimeve=========-->
 
-    <!-- =============kategorite e butonave=====-->
-    <section class="category__buttons">
+    
+  
+ <!-- =============kategorite e butonave=====-->
+<section class="category__buttons">
         <div class="container category__buttons-container">
-            <a href="" class="category__button">Art</a>
-            <a href="" class="category__button">Wild Life</a>
-            <a href="" class="category__button">Travel</a>
-            <a href="" class="category__button">Science & Technology</a>
-            <a href="" class="category__button">Food</a>
-            <a href="" class="category__button">Music</a>
+            <?php 
+            $all_categories_query = "SELECT * FROM categories";
+            $all_categories_result = mysqli_query($connection, $all_categories_query);
+            ?>
+            <?php while($category = mysqli_fetch_assoc($all_categories_result)): ?>
+             <a href="<?= ROOT_URL ?>category-posts.php?id=<?= $category['id'] ?>" class="category__button"><?= $category['title'] ?></a>
+
+            <?php endwhile ?>
+    
         </div>
     </section>
     <!---Perfundimi i kategorive te butonave-->
-
-
-</section>
-<!-- =============fundi i feature post=========-->
- <section class="posts">
-    <div class="container posts__container">
-        <article class="post">
-            <div class="post__thumbnail">
-                <img src="./images/blog2.jpeg" alt="Post Thumbnail">
-            </div>
-            <div class="post__info">
-                <a href="" class="category__button">Wild Life</a>
-                <h3 class="post__title">
-                    <a href="post.html">Lorem ipsum dolor sit amet</a>
-                </h3>
-                <p class="post__body">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                    Iure corporis placeat dolorem blanditiis ab molestias beatae voluptates
-                    consequuntur, hic corrupti quisquam totam illum minima eaque, tempore accusantium eum dolore ducimus!
-                </p>
-            </div>
-        </article>
-    </div>
- </section>
- <!-- =============kategorite e butonave=====-->
- <section class="category__buttons">
-    <div class="container category__buttons-container">
-        <a href=""class="category__button">Category</a>
-        <a href=""class="category__button">Wild Life</a>    
-        <a href=""class="category__button">Travel</a>
-        <a href=""class="category__button">Science & Technology</a>
-        <a href=""class="category__button">Food</a>
-          <a href=""class="category__button">Music</a>
-
-<!---Perfundimi i kategorive te butonave-->
     </div>
  </section>
 
