@@ -3,7 +3,7 @@ require 'config/database.php';
 
 // Merr te dhenat e perdoruesit nga databaza
 if(isset($_SESSION['user-id'])){
-    $id =filter_var($_SESSION['user-id'], FILTER_SANITIZE_NUMBER_INT);
+    $id = (int) filter_var($_SESSION['user-id'], FILTER_SANITIZE_NUMBER_INT);
     $query = "SELECT avatar FROM users WHERE user_id=$id";
     $result = mysqli_query($connection, $query);
     $avatar= mysqli_fetch_assoc($result);
