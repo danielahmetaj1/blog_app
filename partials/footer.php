@@ -81,7 +81,10 @@
             <button id="chatbot-send" aria-label="Dërgo"><i class="uil uil-message"></i></button>
         </div>
     </div>
-    <script src="<?= ROOT_URL ?>js/chatbot.js"></script>
+    <script>
+        const ROOT_URL = '<?= ROOT_URL ?>';
+    </script>
+    <script src="<?= ROOT_URL ?>js/Chatbot.js"></script>
     <?php endif ?>
 
     <script src="<?= ROOT_URL ?>js/main.js"></script>
