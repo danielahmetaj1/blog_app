@@ -35,7 +35,7 @@ unset($msg);
 
 // ── Gemini API ───────────────────────────────────────────────
 // Merr API key falas nga: aistudio.google.com → Get API Key
-$api_key = 'YOUR_GEMINI_API_KEY'; // <-- vendos API key-n tënd këtu
+$api_key = ''; // <-- vendos API key-n tënd këtu
 
 // Konverto historinë në formatin e Gemini
 // Gemini përdor "user"/"model" (jo "assistant")
