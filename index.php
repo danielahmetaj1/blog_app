@@ -1,129 +1,102 @@
 <?php
 include 'partials/header.php';
-//fetch postet qe jane featured
-$featured_query = "SELECT * FROM posts WHERE is_featured=1";
-$featured_result = mysqli_query($connection, $featured_query);
+
+$featured_result = mysqli_query($connection, "SELECT * FROM posts WHERE is_featured=1 LIMIT 1");
 $featured = mysqli_fetch_assoc($featured_result);
 
-//bejme fetch 9 postet me te fundit
-$query = "SELECT * FROM posts ORDER BY created_at DESC LIMIT 9";
-$posts = mysqli_query($connection, $query);
-
+$posts = mysqli_query($connection, "SELECT * FROM posts ORDER BY created_at DESC LIMIT 9");
 ?>
-<!-- keto jane per featured postet nese ka-->
-<?php if(mysqli_num_rows($featured_result)==1): ?>
-    <section class="featured">
-        <div class="container featured__container">
-            <div class="post_thumbnail">
-                <img src="./images/<?= $featured['thumbnail'] ?>">
+
+<?php if($featured): ?>
+<?php
+    $fid   = (int) $featured['id'];
+    $f_cat = mysqli_fetch_assoc(mysqli_query($connection, "SELECT * FROM categories WHERE id=".(int)$featured['category_id']));
+    $f_usr = mysqli_fetch_assoc(mysqli_query($connection, "SELECT * FROM users WHERE user_id=".(int)$featured['user_id']));
+    $f_lc  = (int) mysqli_fetch_assoc(mysqli_query($connection, "SELECT COUNT(*) AS t FROM likes WHERE post_id=$fid"))['t'];
+    $f_cc  = (int) mysqli_fetch_assoc(mysqli_query($connection, "SELECT COUNT(*) AS t FROM comments WHERE post_id=$fid"))['t'];
+?>
+<section class="featured">
+    <div class="container featured__container">
+        <div class="post_thumbnail">
+            <img src="<?= ROOT_URL ?>images/<?= htmlspecialchars($featured['thumbnail']) ?>" alt="Featured post">
+        </div>
+        <div class="post_info">
+            <a href="<?= ROOT_URL ?>category-posts.php?id=<?= $featured['category_id'] ?>" class="category__button">
+                <?= htmlspecialchars($f_cat['title'] ?? 'Uncategorized') ?>
+            </a>
+            <h2 class="post__title">
+                <a href="<?= ROOT_URL ?>post.php?id=<?= $featured['id'] ?>"><?= htmlspecialchars($featured['title']) ?></a>
+            </h2>
+            <p class="post__body"><?= htmlspecialchars(substr($featured['body'], 0, 280)) ?>...</p>
+            <div class="post__meta">
+                <span class="post__meta-item"><i class="uil uil-thumbs-up"></i> <?= $f_lc ?></span>
+                <span class="post__meta-item"><i class="uil uil-comment-dots"></i> <?= $f_cc ?></span>
             </div>
-            <div class="post_info">
-                <?php 
-                $category_id = (int) $featured['category_id'];
-                $category_query = "SELECT * FROM categories WHERE id=$category_id";
-                $category_result = mysqli_query($connection, $category_query);
-                $category = mysqli_fetch_assoc($category_result);
-                ?>
-                <a href="<?= ROOT_URL ?>category-posts.php?id=<?= $featured['category_id'] ?>" class="category__button"><?= $category['title'] ?></a>
-                <h2 class="post__title"><a href="<?= ROOT_URL ?>post.php?id=<?= $featured['id'] ?>"><?= $featured['title'] ?></a></h2>
-                <p class="post__body">
-                 <?= substr($featured['body'], 0, 300) . '...' ?>
-                </p>
-                <div class="post__author">
-                    <?php 
-                    //bejme fetch te userit qe ka shkruar postin
-                    $user_id = (int) $featured['user_id'];
-                    $user_query = "SELECT * FROM users WHERE user_id=$user_id";
-                    $user_result = mysqli_query($connection, $user_query);
-                    $user = mysqli_fetch_assoc($user_result);
-                    ?>
-                    <div class="post__author-avatar">
-                        <img src="./images/<?= $user['avatar'] ?>">
-                    </div>
-                    <div class="post__author-info">
-                        <h5>By: <?= $user['username'] ?></h5>
-                        <small>
-                            <?= date('M d, Y - H:i', strtotime($featured['created_at'])) ?> 
-                        </small>
-                    </div>
+            <div class="post__author">
+                <div class="post__author-avatar">
+                    <img src="<?= ROOT_URL ?>images/<?= htmlspecialchars($f_usr['avatar']) ?>" alt="">
+                </div>
+                <div class="post__author-info">
+                    <h5>By: <?= htmlspecialchars($f_usr['username']) ?></h5>
+                    <small><?= date('M d, Y', strtotime($featured['created_at'])) ?></small>
                 </div>
             </div>
         </div>
+    </div>
+</section>
+<?php endif ?>
 
-    </section>
-    <?php endif ?>
-    <!-- =============fundi i feature post=========-->
-
-
-
-        <section class="posts <?= $featured ? '' : 'section__extra-margin' ?> ">
-            <div class="container posts__container">
-                <?php while($post = mysqli_fetch_assoc($posts)): ?>
-                <article class="post">
-                    <div class="post__thumbnail">
-                        <img src="./images/<?= $post['thumbnail'] ?>" alt="Post Thumbnail">
-                    </div>
-                    <div class="post__info">
-                        <?php 
-                    $category_id = (int) $post['category_id'];
-                    $category_query = "SELECT * FROM categories WHERE id=$category_id";
-                    $category_result = mysqli_query($connection, $category_query);
-                    $category = mysqli_fetch_assoc($category_result);
-                    ?>
-                        <a href="<?= ROOT_URL ?>category-posts.php?id=<?= $post['category_id'] ?>" class="category__button"><?= $category['title'] ?></a>
-                        <h3 class="post__title">
-                            <a href="<?= ROOT_URL ?>post.php?id=<?= $post['id'] ?>"><?= $post['title'] ?></a>
-                        </h3>
-                        <p class="post__body">
-                        <?= substr($post['body'], 0, 150) . '...' ?>
-                        </p>
-                        <div class="post__author">
-                            <?php 
-                        //bejme fetch te userit qe ka shkruar postin
-                        $user_id = (int) $post['user_id'];
-                        $user_query = "SELECT * FROM users WHERE user_id=$user_id";
-                        $user_result = mysqli_query($connection, $user_query);
-                        $user = mysqli_fetch_assoc($user_result);
-                        ?>
-                            <div class="post__author-avatar">
-                                <img src="./images/<?= $user['avatar'] ?>" alt="Author Avatar">
-                            </div>
-                            <div class="post__author-info">
-                                <h5>By: <?= $user['username'] ?></h5>
-                                <small>
-                                    <?= date('M d, Y - H:i', strtotime($post['created_at'])) ?> 
-                                </small>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-            <?php endwhile ?>
+<section class="posts <?= $featured ? '' : 'section__extra-margin' ?>">
+    <div class="container posts__container">
+        <?php while($post = mysqli_fetch_assoc($posts)):
+            $pid = (int) $post['id'];
+            $cat = mysqli_fetch_assoc(mysqli_query($connection, "SELECT * FROM categories WHERE id=".(int)$post['category_id']));
+            $usr = mysqli_fetch_assoc(mysqli_query($connection, "SELECT * FROM users WHERE user_id=".(int)$post['user_id']));
+            $lc  = (int) mysqli_fetch_assoc(mysqli_query($connection, "SELECT COUNT(*) AS t FROM likes WHERE post_id=$pid"))['t'];
+            $cc  = (int) mysqli_fetch_assoc(mysqli_query($connection, "SELECT COUNT(*) AS t FROM comments WHERE post_id=$pid"))['t'];
+        ?>
+        <article class="post">
+            <div class="post__thumbnail">
+                <img src="<?= ROOT_URL ?>images/<?= htmlspecialchars($post['thumbnail']) ?>" alt="Post Thumbnail">
             </div>
-        </section>
-    <!-- =============fundi i postimeve=========-->
+            <div class="post__info">
+                <a href="<?= ROOT_URL ?>category-posts.php?id=<?= $post['category_id'] ?>" class="category__button">
+                    <?= htmlspecialchars($cat['title'] ?? 'Uncategorized') ?>
+                </a>
+                <h3 class="post__title">
+                    <a href="<?= ROOT_URL ?>post.php?id=<?= $post['id'] ?>"><?= htmlspecialchars($post['title']) ?></a>
+                </h3>
+                <p class="post__body"><?= htmlspecialchars(substr($post['body'], 0, 130)) ?>...</p>
+                <div class="post__meta">
+                    <span class="post__meta-item"><i class="uil uil-thumbs-up"></i> <?= $lc ?></span>
+                    <span class="post__meta-item"><i class="uil uil-comment-dots"></i> <?= $cc ?></span>
+                </div>
+                <div class="post__author">
+                    <div class="post__author-avatar">
+                        <img src="<?= ROOT_URL ?>images/<?= htmlspecialchars($usr['avatar']) ?>" alt="">
+                    </div>
+                    <div class="post__author-info">
+                        <h5>By: <?= htmlspecialchars($usr['username']) ?></h5>
+                        <small><?= date('M d, Y', strtotime($post['created_at'])) ?></small>
+                    </div>
+                </div>
+            </div>
+        </article>
+        <?php endwhile ?>
+    </div>
+</section>
 
-    <!-- =============kategorite e butonave=====-->
-    <section class="category__buttons">
-        <div class="container category__buttons-container">
-            <?php 
-            $all_categories_query = "SELECT * FROM categories";
-            $all_categories_result = mysqli_query($connection, $all_categories_query);
-            ?> 
-            <?php while($category = mysqli_fetch_assoc($all_categories_result)): ?>
-             <a href="<?= ROOT_URL ?>category-posts.php?id=<?= $category['id'] ?>" class="category__button"><?= $category['title'] ?></a>
+<section class="category__buttons">
+    <div class="container category__buttons-container">
+        <?php
+        $cats = mysqli_query($connection, "SELECT * FROM categories");
+        while($c = mysqli_fetch_assoc($cats)):
+        ?>
+        <a href="<?= ROOT_URL ?>category-posts.php?id=<?= $c['id'] ?>" class="category__button">
+            <?= htmlspecialchars($c['title']) ?>
+        </a>
+        <?php endwhile ?>
+    </div>
+</section>
 
-            <?php endwhile ?>
-    
-        </div>
-    </section>
-    <!---Perfundimi i kategorive te butonave-->
-
-
-
-
-    <?php 
-    
-    include'partials/footer.php'
-
-
-    ?>
+<?php include 'partials/footer.php'; ?>

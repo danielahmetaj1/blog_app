@@ -1,11 +1,10 @@
-
     <footer>
         <div class="footer__socials">
-            <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" title="Visit our Facebook page"><i class="uil uil-facebook-f"></i></a>
-            <a href="https://www.twitter.com/" target="_blank" rel="noopener noreferrer" title="Visit our Twitter page"><i class="uil uil-twitter"></i></a>
-            <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" title="Visit our Instagram page"><i class="uil uil-instagram"></i></a>
-            <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" title="Visit our LinkedIn page"><i class="uil uil-linkedin"></i></a>
-            <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer" title="Visit our YouTube channel"><i class="uil uil-youtube"></i></a>
+            <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" title="Facebook"><i class="uil uil-facebook-f"></i></a>
+            <a href="https://www.twitter.com/"  target="_blank" rel="noopener noreferrer" title="Twitter"><i class="uil uil-twitter"></i></a>
+            <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" title="Instagram"><i class="uil uil-instagram"></i></a>
+            <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i class="uil uil-linkedin"></i></a>
+            <a href="https://www.youtube.com/"  target="_blank" rel="noopener noreferrer" title="YouTube"><i class="uil uil-youtube"></i></a>
         </div>
         <div class="container footer__container">
             <article>
@@ -27,7 +26,6 @@
                     <li><a href="">Email support</a></li>
                     <li><a href="">Social support</a></li>
                     <li><a href="">Location</a></li>
-
                 </ul>
             </article>
             <article>
@@ -56,11 +54,6 @@
         </div>
     </footer>
 
-    </section>
-    <!-- =============fundi i feature post=========-->
-
-
     <script src="<?= ROOT_URL ?>js/main.js"></script>
 </body>
-
 </html>
