@@ -5,7 +5,7 @@ header('Content-Type: application/json');
 
 // Vetëm përdoruesit e kyçur
 if (!isset($_SESSION['user-id'])) {
-    echo json_encode(['error' => 'Duhet te kyçesh per te perdorur chatbot-in.']);
+    echo json_encode(['error' => 'Duhet të kyçesh për të përdorur chatbot-in.']);
     exit;
 }
 
@@ -33,28 +33,41 @@ foreach ($messages as &$msg) {
 }
 unset($msg);
 
-// ── Claude API ──────────────────────────────────────────────
-$api_key = 'YOUR_ANTHROPIC_API_KEY'; // <-- vendos API key-n tënd këtu
+// ── Gemini API ───────────────────────────────────────────────
+// Merr API key falas nga: aistudio.google.com → Get API Key
+$api_key = 'YOUR_GEMINI_API_KEY'; // <-- vendos API key-n tënd këtu
+
+// Konverto historinë në formatin e Gemini
+// Gemini përdor "user"/"model" (jo "assistant")
+$system_prompt = 'Jeni asistenti i support-it të blogut WriteX. Ndihmoni përdoruesit me pyetje rreth platformës: si të publikojnë postime, si të menaxhojnë llogarinë, si të ndërveprojnë me postimet (likes, komente, share). Jini të shkurtër, miqësor dhe profesional. Përgjigjuni në gjuhën që flet përdoruesi.';
+
+$contents = [];
+foreach ($messages as $msg) {
+    $contents[] = [
+        'role'  => $msg['role'] === 'assistant' ? 'model' : 'user',
+        'parts' => [['text' => $msg['content']]],
+    ];
+}
 
 $payload = json_encode([
-    'model'      => 'claude-sonnet-4-20250514',
-    'max_tokens' => 512,
-    'system'     => 'Jeni asistenti i support-it te blogut WriteX. Ndihmoni perdoruesit me pyetje rreth platformes: 
-        si te publikojne postime, si te menaxhojne llogarine, si te nderveprojne me postimet (likes, komente, share). 
-        Jini të shkurter, miqesor dhe profesional. Përgjigjuni ne gjuhen qe flet përdoruesi.',
-    'messages'   => $messages,
+    'system_instruction' => [
+        'parts' => [['text' => $system_prompt]]
+    ],
+    'contents'           => $contents,
+    'generationConfig'   => [
+        'maxOutputTokens' => 512,
+        'temperature'     => 0.7,
+    ],
 ]);
 
-$ch = curl_init('https://api.anthropic.com/v1/messages');
+$url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=' . $api_key;
+
+$ch = curl_init($url);
 curl_setopt_array($ch, [
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_POST           => true,
     CURLOPT_POSTFIELDS     => $payload,
-    CURLOPT_HTTPHEADER     => [
-        'Content-Type: application/json',
-        'x-api-key: ' . $api_key,
-        'anthropic-version: 2023-06-01',
-    ],
+    CURLOPT_HTTPHEADER     => ['Content-Type: application/json'],
     CURLOPT_TIMEOUT        => 30,
 ]);
 
@@ -63,11 +76,11 @@ $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 curl_close($ch);
 
 if ($response === false || $http_code !== 200) {
-    echo json_encode(['error' => 'Gabim ne lidhje me API-n. Provo perseri.']);
+    echo json_encode(['error' => 'Gabim në lidhje me API-n. Provo përsëri.']);
     exit;
 }
 
-$data = json_decode($response, true);
-$reply = $data['content'][0]['text'] ?? 'Nuk mora përgjigje. Provo perseri.';
+$data  = json_decode($response, true);
+$reply = $data['candidates'][0]['content']['parts'][0]['text'] ?? 'Nuk mora përgjigje. Provo përsëri.';
 
 echo json_encode(['reply' => $reply]);
