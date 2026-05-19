@@ -21,6 +21,8 @@ if(isset($_SESSION['user-id'])){
     <title>WriteX Blog</title>
     <!-- Stilizim custom-->
     <link rel="stylesheet" href="<?= ROOT_URL ?>css/style.css">
+    <!-- Chatbot -->
+    <link rel="stylesheet" href="<?= ROOT_URL ?>css/chatbot.css">
     <!--Ikona -->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.2.0/css/line.css">
     <!-- Google font -->

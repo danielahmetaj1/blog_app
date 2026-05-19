@@ -1,4 +1,4 @@
-    <footer>
+<footer>
         <div class="footer__socials">
             <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" title="Facebook"><i class="uil uil-facebook-f"></i></a>
             <a href="https://www.twitter.com/"  target="_blank" rel="noopener noreferrer" title="Twitter"><i class="uil uil-twitter"></i></a>
@@ -53,6 +53,36 @@
             <small>Copyright &copy; WriteX blog. All rights reserved.</small>
         </div>
     </footer>
+
+    <!-- Chatbot bubble — shfaqet vetëm nëse useri është i kyçur -->
+    <?php if (isset($_SESSION['user-id'])): ?>
+    <button id="chatbot-bubble" aria-label="Hap support chat">
+        <i class="uil uil-comment-dots"></i>
+        <span class="bubble__badge"></span>
+    </button>
+
+    <div id="chatbot-window" role="dialog" aria-label="Support Chat">
+        <div class="chatbot__header">
+            <div class="chatbot__avatar"><i class="uil uil-robot"></i></div>
+            <div class="chatbot__info">
+                <span class="chatbot__name">WriteX Support</span>
+                <span class="chatbot__status">Online</span>
+            </div>
+            <button id="chatbot-close" aria-label="Mbyll chat"><i class="uil uil-times"></i></button>
+        </div>
+        <div class="chatbot__messages" id="chatbot-messages">
+            <div class="msg bot">
+                <div class="msg__bubble">Përshëndetje! 👋 Jam asistenti i WriteX. Si mund t'ju ndihmoj sot?</div>
+                <span class="msg__time"><?= date('H:i') ?></span>
+            </div>
+        </div>
+        <div class="chatbot__input-area">
+            <textarea id="chatbot-input" placeholder="Shkruaj një pyetje..." rows="1"></textarea>
+            <button id="chatbot-send" aria-label="Dërgo"><i class="uil uil-message"></i></button>
+        </div>
+    </div>
+    <script src="<?= ROOT_URL ?>js/chatbot.js"></script>
+    <?php endif ?>
 
     <script src="<?= ROOT_URL ?>js/main.js"></script>
 </body>
