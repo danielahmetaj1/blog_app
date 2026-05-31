@@ -151,5 +151,6 @@ blog_app/
 Ky projekt është zhvilluar si projekt akademik/personal dhe funksionon vetëm në mjedis lokal. Nuk është i destinuar për deployment në server prodhimi pa rregullime shtesë të sigurisë.
 
 ## Autori
-
 **Daniel Ahmetaj** — [@danielahmetaj1](https://github.com/danielahmetaj1)
+**Denis Daja**
+**Besnik Hoxha**
