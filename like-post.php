@@ -4,27 +4,27 @@ include 'config/database.php';
 header('Content-Type: application/json');
 
 if (!isset($_SESSION['user-id'])) {
-    echo json_encode(['success' => false, 'message' => 'You must be logged in to like posts.']);
+    echo json_encode(['success' => false, 'message' => 'Duhet te jeni te kycur per te pelqyer postime.']);
     exit;
 }
 
 if (!isset($_POST['post_id'])) {
-    echo json_encode(['success' => false, 'message' => 'Invalid request.']);
+    echo json_encode(['success' => false, 'message' => 'Kerkese e pavlefshme.']);
     exit;
 }
 
 $post_id = (int) $_POST['post_id'];
 $user_id = (int) $_SESSION['user-id'];
 
-// Check if already liked
+// Kontrollo nese eshte pelqyer me pare
 $check = mysqli_query($connection, "SELECT id FROM likes WHERE post_id=$post_id AND user_id=$user_id");
 
 if (mysqli_num_rows($check) > 0) {
-    // Unlike
+    // Hiq pelqimin
     mysqli_query($connection, "DELETE FROM likes WHERE post_id=$post_id AND user_id=$user_id");
     $liked = false;
 } else {
-    // Like
+    // Pelqe
     mysqli_query($connection, "INSERT INTO likes (post_id, user_id) VALUES ($post_id, $user_id)");
     $liked = true;
 }

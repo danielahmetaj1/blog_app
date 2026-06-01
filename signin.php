@@ -8,7 +8,7 @@ unset($_SESSION['signin-data']);
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sq">
 
 <head>
     <meta charset="UTF-8">
@@ -29,7 +29,7 @@ unset($_SESSION['signin-data']);
 
     <section class="form__section">
         <div class="container form__section-container">
-            <h2>Sign In</h2>
+            <h2>Kycu</h2>
             <?php if (isset ($_SESSION['signup-success'])) : ?>
                 <div class="alert__message success">
                     <p>
@@ -48,10 +48,10 @@ unset($_SESSION['signin-data']);
                 </div>
             <?php endif ?>
             <form action="<?= ROOT_URL ?>signin-logic.php" method="POST">
-                <input type="text" name="username_email" value="<?= htmlspecialchars($username_email ?? '', ENT_QUOTES, 'UTF-8') ?>" placeholder="Username or Email">
+                <input type="text" name="username_email" value="<?= htmlspecialchars($username_email ?? '', ENT_QUOTES, 'UTF-8') ?>" placeholder="Username ose Email">
                 <input type="password" name="password" placeholder="Password">
-                <button type="submit" name="submit" class="btn">Sign In</button>
-                <small>Don't have an account? <a href="signup.php"> Sign up</a> </small>
+                <button type="submit" name="submit" class="btn">Kycu</button>
+                <small>Nuk ke nje llogari? <a href="signup.php"> Regjistrohu</a> </small>
             </form>
 
         </div>

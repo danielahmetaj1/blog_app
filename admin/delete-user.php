@@ -9,7 +9,7 @@ if(isset($_GET['id'])){
     $user = mysqli_fetch_assoc($result);
 
 
-  // sigurohemi qe marim vetem nje user
+  // sigurohemi qe marrim vetem nje user
   if(mysqli_num_rows($result)==1){
     $avatar_name = $user['avatar'];
     $avatar_path = '../images/' . $avatar_name;
@@ -19,7 +19,7 @@ if(isset($_GET['id'])){
     }
   }
 
-  //selektojme te gjithe te dhenat e user dhe i fshijme ato
+  //selektojme te gjitha te dhenat e user dhe i fshijme ato
 $thumbnails_query = "SELECT thumbnail FROM posts WHERE user_id=$id";
 $thumbnails_result = mysqli_query($connection, $thumbnails_query);
 if(mysqli_num_rows($thumbnails_result) > 0){
@@ -32,16 +32,16 @@ if(mysqli_num_rows($thumbnails_result) > 0){
 }
 
 
-  //fshi perdorues nga databaza
+  //fshi perdoruesin nga databaza
   $delete_user_query = "DELETE FROM users WHERE user_id=$id";
   $delete_user_result = mysqli_query($connection,$delete_user_query);
 if(mysqli_errno($connection)){
-    $_SESSION['delete-user']="Nuk mund te fshinim perdoruesi '{$user['firstname']}' '{$user['lastname']}'";
+    $_SESSION['delete-user']="Nuk mund te fshinim perdoruesin '{$user['firstname']}' '{$user['lastname']}'";
 
 }else{
-    $_SESSION['delete-user-success'] = "'{$user['firstname']}' '{$user['lastname']}' perdoruesi u fshi me sukses.";
+    $_SESSION['delete-user-success'] = "Perdoruesi '{$user['firstname']}' '{$user['lastname']}' u fshi me sukses.";
 }
 }
 
 header('location: ' . ROOT_URL . 'admin/manage-users.php');
-die(); 
+die();

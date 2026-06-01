@@ -8,60 +8,60 @@
         </div>
         <div class="container footer__container">
             <article>
-                <h4>Categories</h4>
+                <h4>Kategorite</h4>
                 <ul>
                     <li><a href="">Art</a></li>
-                    <li><a href="">Wild Life</a></li>
-                    <li><a href="">Travel</a></li>
-                    <li><a href="">Science & Technology</a></li>
-                    <li><a href="">Food</a></li>
-                    <li><a href="">Music</a></li>
+                    <li><a href="">Jeta e Eger</a></li>
+                    <li><a href="">Udhetime</a></li>
+                    <li><a href="">Shkence & Teknologji</a></li>
+                    <li><a href="">Ushqim</a></li>
+                    <li><a href="">Muzike</a></li>
                 </ul>
             </article>
             <article>
-                <h4>Support</h4>
+                <h4>Mbeshtetje</h4>
                 <ul>
-                    <li><a href="">Online support</a></li>
-                    <li><a href="">Call numbers</a></li>
-                    <li><a href="">Email support</a></li>
-                    <li><a href="">Social support</a></li>
-                    <li><a href="">Location</a></li>
+                    <li><a href="">Mbeshtetje online</a></li>
+                    <li><a href="">Numra kontakti</a></li>
+                    <li><a href="">Mbeshtetje me email</a></li>
+                    <li><a href="">Mbeshtetje sociale</a></li>
+                    <li><a href="">Vendndodhja</a></li>
                 </ul>
             </article>
             <article>
                 <h4>Blog</h4>
                 <ul>
-                    <li><a href="">Safety</a></li>
-                    <li><a href="">Repair</a></li>
-                    <li><a href="">Recent</a></li>
-                    <li><a href="">Popular</a></li>
-                    <li><a href="">Categories</a></li>
+                    <li><a href="">Siguria</a></li>
+                    <li><a href="">Riparime</a></li>
+                    <li><a href="">Te fundit</a></li>
+                    <li><a href="">Me te njohurit</a></li>
+                    <li><a href="">Kategorite</a></li>
                 </ul>
             </article>
             <article>
-                <h4>Permalinks</h4>
+                <h4>Lidhje</h4>
                 <ul>
-                    <li><a href="">Home</a></li>
+                    <li><a href="">Faqja kryesore</a></li>
                     <li><a href="">Blog</a></li>
-                    <li><a href="">About</a></li>
-                    <li><a href="">Services</a></li>
-                    <li><a href="">Contact</a></li>
+                    <li><a href="">Rreth Nesh</a></li>
+                    <li><a href="">Sherbime</a></li>
+                    <li><a href="">Kontakt</a></li>
                 </ul>
             </article>
         </div>
         <div class="footer__copyright">
-            <small>Copyright &copy; WriteX blog. All rights reserved.</small>
+            <small>E drejta e autorit &copy; WriteX blog. Te gjitha te drejtat e rezervuara.</small>
         </div>
     </footer>
 
-    <!-- Chatbot bubble — shfaqet vetëm nëse useri është i kyçur -->
+    <!-- Chatbot bubble - shfaqet vetem nese useri eshte i kycur -->
     <?php if (isset($_SESSION['user-id'])): ?>
-    <button id="chatbot-bubble" aria-label="Hap support chat">
+    <button id="chatbot-bubble" aria-label="Hap chat-in e mbeshtetjes">
         <i class="uil uil-comment-dots"></i>
         <span class="bubble__badge"></span>
     </button>
 
-    <div id="chatbot-window" role="dialog" aria-label="Support Chat">
+    <div id="chatbot-window" role="dialog" aria-label="Chat Mbeshtetje">
         <div class="chatbot__header">
             <div class="chatbot__avatar"><i class="uil uil-robot"></i></div>
             <div class="chatbot__info">
@@ -72,13 +72,13 @@
         </div>
         <div class="chatbot__messages" id="chatbot-messages">
             <div class="msg bot">
-                <div class="msg__bubble">Përshëndetje! 👋 Jam asistenti i WriteX. Si mund t'ju ndihmoj sot?</div>
+                <div class="msg__bubble">Pershendetje! 👋 Jam asistenti i WriteX. Si mund t'ju ndihmoj sot?</div>
                 <span class="msg__time"><?= date('H:i') ?></span>
             </div>
         </div>
         <div class="chatbot__input-area">
-            <textarea id="chatbot-input" placeholder="Shkruaj një pyetje..." rows="1"></textarea>
-            <button id="chatbot-send" aria-label="Dërgo"><i class="uil uil-message"></i></button>
+            <textarea id="chatbot-input" placeholder="Shkruaj nje pyetje..." rows="1"></textarea>
+            <button id="chatbot-send" aria-label="Dergo"><i class="uil uil-message"></i></button>
         </div>
     </div>
     <script>

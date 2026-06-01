@@ -1,5 +1,5 @@
 (() => {
-    // Historia e bisedës
+    // Historia e bisedes
     let history = [];
     let isTyping = false;
 
@@ -10,9 +10,9 @@
     const input   = document.getElementById('chatbot-input');
     const sendBtn = document.getElementById('chatbot-send');
 
-    if (!bubble) return; // Nuk është i kyçur — nuk shfaqet
+    if (!bubble) return; // Nuk eshte i kycur - nuk shfaqet
 
-    // ── Hap / Mbyll ─────────────────────────────────────────
+    // -- Hap / Mbyll ---------------------------------------
     bubble.addEventListener('click', () => {
         const isOpen = win.classList.toggle('open');
         bubble.querySelector('i').className = isOpen ? 'uil uil-times' : 'uil uil-comment-dots';
@@ -28,7 +28,7 @@
         bubble.querySelector('i').className = 'uil uil-comment-dots';
     });
 
-    // ── Dërgo mesazh ────────────────────────────────────────
+    // -- Dergo mesazh --------------------------------------
     const sendMessage = async () => {
         const text = input.value.trim();
         if (!text || isTyping) return;
@@ -60,14 +60,14 @@
                 addMessage('bot', data.reply);
                 history.push({ role: 'assistant', content: data.reply });
 
-                // Badge nëse dritarja është e mbyllur
+                // Badge nese dritarja eshte e mbyllur
                 if (!win.classList.contains('open')) {
                     bubble.classList.add('has-badge');
                 }
             }
         } catch (e) {
             typingEl.remove();
-            addMessage('bot', '⚠️ Problem lidhje. Provo përsëri.');
+            addMessage('bot', '⚠️ Problem lidhje. Provo perseri.');
         }
 
         isTyping = false;
@@ -90,7 +90,7 @@
         input.style.height = Math.min(input.scrollHeight, 100) + 'px';
     });
 
-    // ── Helper: shto mesazh ─────────────────────────────────
+    // -- Helper: shto mesazh -------------------------------
     function addMessage(role, text) {
         const now  = new Date();
         const time = now.getHours().toString().padStart(2,'0') + ':' +
@@ -105,7 +105,7 @@
         scrollToBottom();
     }
 
-    // ── Helper: typing indicator ────────────────────────────
+    // -- Helper: typing indicator --------------------------
     function showTyping() {
         const div = document.createElement('div');
         div.className = 'msg bot typing';

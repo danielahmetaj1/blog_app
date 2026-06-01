@@ -1,12 +1,12 @@
 <?php
 include 'partials/header.php';
 
-// marja e kategorive nga databaza
+// marrja e kategorive nga databaza
 $category_query = "SELECT * FROM categories";
 $categories = mysqli_query($connection, $category_query);
 
 
-//marja e tedhenave nga databaza nese id eshte vendosur
+//marrja e te dhenave nga databaza nese id eshte vendosur
 
 if(isset($_GET['id'])) {
     $id = filter_var($_GET['id'],FILTER_SANITIZE_NUMBER_INT);
@@ -46,11 +46,11 @@ if(isset($_SESSION['edit-post'])) {
                 <label for="is_featured">Vecori</label>
             </div>
             <div class="form__control">
-                <label for="thumbnail">Ndrysho Miniaturën</label>
+                <label for="thumbnail">Ndrysho Miniaturen</label>
                 <input type="file" name="thumbnail" id="thumbnail">
             </div>
             
-            <button type="submit" name="submit" class="btn">Perditso Postin</button>
+            <button type="submit" name="submit" class="btn">Perditeso Postin</button>
         </form>
 
     </div>

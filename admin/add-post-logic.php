@@ -15,7 +15,7 @@ if(isset($_POST['submit'])){
     }elseif(!$body){
         $_SESSION['add-post'] = "Zhvillimi eshte i detyrueshem";
     }elseif(!$category_id){
-        $_SESSION['add-post'] = "Zgjedhni nje kategori";
+        $_SESSION['add-post'] = "Zgjidhni nje kategori";
     }elseif(!$thumbnail['name']){
         $_SESSION['add-post'] = "Zgjidhni nje miniature";
     }else{

@@ -1,11 +1,11 @@
 <?php 
 include 'partials/header.php';
 
-//mer kategorite nga databaza
+//merr kategorite nga databaza
 $query = "SELECT * FROM categories";
 $categories = mysqli_query($connection, $query);
 
-//kthe mbrapsh te dhenat e formes nese form ka qene invalid
+//ktheji mbrapsh te dhenat e formes nese forma ka qene invalide
 $title = $_SESSION['add-post-data']['title'] ?? null;
 $body = $_SESSION['add-post-data']['body'] ?? null; 
 unset($_SESSION['add-post-data']);
@@ -21,7 +21,6 @@ unset($_SESSION['add-post-data']);
                 <?= $_SESSION['add-post']; 
                 unset($_SESSION['add-post']);
                 ?>
-
             </p>
         </div>
         <?php endif ?>
@@ -41,7 +40,7 @@ unset($_SESSION['add-post-data']);
             </div>
             <?php endif ?>
             <div class="form__control">
-                <label for="thumbnail">Zgjidh Miniaturën</label>
+                <label for="thumbnail">Zgjidh Miniaturen</label>
                 <input type="file" id="thumbnail" name="thumbnail">
             </div>
             

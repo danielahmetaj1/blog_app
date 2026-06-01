@@ -24,7 +24,7 @@ if(isset($_GET['id'])){
                 <option value="author">Autor</option>
                 <option value="admin">Admin</option>
             </select>
-            <button type="submit" name="submit" class="btn">Perditso perdorues</button>
+            <button type="submit" name="submit" class="btn">Perditeso perdoruesin</button>
         </form>
 
     </div>

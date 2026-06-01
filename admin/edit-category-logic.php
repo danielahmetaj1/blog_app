@@ -15,7 +15,7 @@ if(isset($_POST['submit'])){
         $result = mysqli_query($connection, $query);
 
         if(!$result){
-            $_SESSION['edit-category'] = "Diqka shkoi gabim. Ju lutem provoni perseri.";
+            $_SESSION['edit-category'] = "Dicka shkoi gabim. Ju lutem provoni perseri.";
         }else{
             $_SESSION['edit-category-success'] = "Kategoria u perditesua me sukses.";
         }

@@ -47,13 +47,13 @@ $post_title_enc = urlencode($post['title']);
                 <img src="<?= ROOT_URL ?>images/<?= htmlspecialchars($author['avatar']) ?>" alt="">
             </div>
             <div class="post__author-info">
-                <h5>By: <?= htmlspecialchars($author['username']) ?></h5>
-                <small><?= date('M d, Y · H:i', strtotime($post['created_at'])) ?></small>
+                <h5>Nga: <?= htmlspecialchars($author['username']) ?></h5>
+                <small><?= date('d M, Y · H:i', strtotime($post['created_at'])) ?></small>
             </div>
         </div>
 
         <div class="singlepost__thumbnail">
-            <img src="<?= ROOT_URL ?>images/<?= htmlspecialchars($post['thumbnail']) ?>" alt="Post thumbnail">
+            <img src="<?= ROOT_URL ?>images/<?= htmlspecialchars($post['thumbnail']) ?>" alt="Miniatura e postimit">
         </div>
 
         <p><?= nl2br(htmlspecialchars($post['body'])) ?></p>
@@ -62,10 +62,10 @@ $post_title_enc = urlencode($post['title']);
         <div class="post__interactions">
             <button class="interaction__btn <?= $user_liked ? 'liked' : '' ?>"
                     id="like-btn" data-post-id="<?= $id ?>"
-                    title="<?= !isset($_SESSION['user-id']) ? 'Kyçu për të pëlqyer' : '' ?>">
+                    title="<?= !isset($_SESSION['user-id']) ? 'Kycu per te pelqyer' : '' ?>">
                 <i class="uil uil-thumbs-up"></i>
                 <span id="like-count"><?= $like_count ?></span>
-                <span>Like<?= $like_count !== 1 ? 's' : '' ?></span>
+                <span>Pelqim<?= $like_count !== 1 ? 'e' : '' ?></span>
             </button>
 
             <a href="#comments-section" class="interaction__btn">
@@ -75,7 +75,7 @@ $post_title_enc = urlencode($post['title']);
             </a>
 
             <div class="share__group">
-                <span class="share__label"><i class="uil uil-share-alt"></i> Share</span>
+                <span class="share__label"><i class="uil uil-share-alt"></i> Shperndaj</span>
                 <div class="share__buttons">
                     <a href="https://www.facebook.com/sharer/sharer.php?u=<?= $post_url ?>"
                        target="_blank" rel="noopener" class="share__btn share__btn--facebook"
@@ -97,7 +97,7 @@ $post_title_enc = urlencode($post['title']);
                         <i class="uil uil-copy"></i>
                     </button>
                 </div>
-                <span id="share-count" class="share__count"><?= $share_count ?> share<?= $share_count !== 1 ? 's' : '' ?></span>
+                <span id="share-count" class="share__count"><?= $share_count ?> shperndarje</span>
             </div>
         </div>
 
@@ -112,12 +112,12 @@ $post_title_enc = urlencode($post['title']);
             <?php if (isset($_SESSION['user-id'])): ?>
             <form class="comment__form" id="comment-form">
                 <input type="hidden" name="post_id" value="<?= $id ?>">
-                <textarea name="body" id="comment-body" placeholder="Shkruaj komentin tënd..." rows="3" required></textarea>
+                <textarea name="body" id="comment-body" placeholder="Shkruaj komentin tend..." rows="3" required></textarea>
                 <button type="submit" class="btn">Posto Komentin</button>
             </form>
             <?php else: ?>
             <p class="comment__login-notice">
-                <a href="<?= ROOT_URL ?>signin.php">Kyçu</a> për të lënë koment.
+                <a href="<?= ROOT_URL ?>signin.php">Kycu</a> per te lene koment.
             </p>
             <?php endif; ?>
 
@@ -130,7 +130,7 @@ $post_title_enc = urlencode($post['title']);
                     <div class="comment__body">
                         <div class="comment__meta">
                             <strong><?= htmlspecialchars($c['username']) ?></strong>
-                            <small><?= date('M d, Y · H:i', strtotime($c['created_at'])) ?></small>
+                            <small><?= date('d M, Y · H:i', strtotime($c['created_at'])) ?></small>
                         </div>
                         <p><?= nl2br(htmlspecialchars($c['body'])) ?></p>
                     </div>

@@ -18,11 +18,11 @@ $posts = mysqli_query($connection, "SELECT * FROM posts ORDER BY created_at DESC
 <section class="featured">
     <div class="container featured__container">
         <div class="post_thumbnail">
-            <img src="<?= ROOT_URL ?>images/<?= htmlspecialchars($featured['thumbnail']) ?>" alt="Featured post">
+            <img src="<?= ROOT_URL ?>images/<?= htmlspecialchars($featured['thumbnail']) ?>" alt="Postim i vecuar">
         </div>
         <div class="post_info">
             <a href="<?= ROOT_URL ?>category-posts.php?id=<?= $featured['category_id'] ?>" class="category__button">
-                <?= htmlspecialchars($f_cat['title'] ?? 'Uncategorized') ?>
+                <?= htmlspecialchars($f_cat['title'] ?? 'Pa kategori') ?>
             </a>
             <h2 class="post__title">
                 <a href="<?= ROOT_URL ?>post.php?id=<?= $featured['id'] ?>"><?= htmlspecialchars($featured['title']) ?></a>
@@ -37,8 +37,8 @@ $posts = mysqli_query($connection, "SELECT * FROM posts ORDER BY created_at DESC
                     <img src="<?= ROOT_URL ?>images/<?= htmlspecialchars($f_usr['avatar']) ?>" alt="">
                 </div>
                 <div class="post__author-info">
-                    <h5>By: <?= htmlspecialchars($f_usr['username']) ?></h5>
-                    <small><?= date('M d, Y', strtotime($featured['created_at'])) ?></small>
+                    <h5>Nga: <?= htmlspecialchars($f_usr['username']) ?></h5>
+                    <small><?= date('d M, Y', strtotime($featured['created_at'])) ?></small>
                 </div>
             </div>
         </div>
@@ -57,11 +57,11 @@ $posts = mysqli_query($connection, "SELECT * FROM posts ORDER BY created_at DESC
         ?>
         <article class="post">
             <div class="post__thumbnail">
-                <img src="<?= ROOT_URL ?>images/<?= htmlspecialchars($post['thumbnail']) ?>" alt="Post Thumbnail">
+                <img src="<?= ROOT_URL ?>images/<?= htmlspecialchars($post['thumbnail']) ?>" alt="Miniatura e postimit">
             </div>
             <div class="post__info">
                 <a href="<?= ROOT_URL ?>category-posts.php?id=<?= $post['category_id'] ?>" class="category__button">
-                    <?= htmlspecialchars($cat['title'] ?? 'Uncategorized') ?>
+                    <?= htmlspecialchars($cat['title'] ?? 'Pa kategori') ?>
                 </a>
                 <h3 class="post__title">
                     <a href="<?= ROOT_URL ?>post.php?id=<?= $post['id'] ?>"><?= htmlspecialchars($post['title']) ?></a>
@@ -76,8 +76,8 @@ $posts = mysqli_query($connection, "SELECT * FROM posts ORDER BY created_at DESC
                         <img src="<?= ROOT_URL ?>images/<?= htmlspecialchars($usr['avatar']) ?>" alt="">
                     </div>
                     <div class="post__author-info">
-                        <h5>By: <?= htmlspecialchars($usr['username']) ?></h5>
-                        <small><?= date('M d, Y', strtotime($post['created_at'])) ?></small>
+                        <h5>Nga: <?= htmlspecialchars($usr['username']) ?></h5>
+                        <small><?= date('d M, Y', strtotime($post['created_at'])) ?></small>
                     </div>
                 </div>
             </div>

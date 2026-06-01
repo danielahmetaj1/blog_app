@@ -46,7 +46,7 @@ if (isset($_POST['submit'])) {
         }
     }
 
-    // per cdo problem tjeter,ridrejto ne signin page me te dhenat e login
+    // per cdo problem tjeter, ridrejto ne signin page me te dhenat e login
     if (isset($_SESSION['signin'])) {
         $_SESSION['signin-data'] = ['username_email' => $username_email];
         header('location: ' . ROOT_URL . 'signin.php');

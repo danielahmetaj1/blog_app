@@ -53,32 +53,32 @@ $posts = mysqli_query($connection, $querry);
         <aside>
             <ul>
                 <li><a href="add-post.php"><i class="uil uil-pen"></i>
-                        <h5>Add Post</h5>
+                        <h5>Shto Post</h5>
 
                     </a>
                 </li>
                 <li><a href="index.php" class="active"><i class="uil uil-postcard"></i>
-                        <h5>Manage Posts</h5>
+                        <h5>Menaxho Postet</h5>
 
                     </a>
                 </li>
                 <?php  if(isset($_SESSION['user_is_admin'])): ?>
                 <li><a href="add-user.php"><i class="uil uil-user-plus"></i>
-                        <h5>Add User</h5>
+                        <h5>Shto Perdorues</h5>
 
                     </a>
                 </li>
                 <li><a href="manage-users.php"><i class="uil uil-users-alt"></i>
-                        <h5>Manage Users</h5>
+                        <h5>Menaxho Perdoruesit</h5>
 
                     </a>
                 </li>
                 <li><a href="add-category.php"><i class="uil uil-edit"></i>
-                        <h5>Add Category</h5>
+                        <h5>Shto Kategori</h5>
                     </a>
                 </li>
                 <li><a href="manage-categories.php"><i class="uil uil-list-ul"></i>
-                        <h5>Manage Categories</h5>
+                        <h5>Menaxho Kategorite</h5>
 
                     </a>
                 </li>
@@ -86,7 +86,7 @@ $posts = mysqli_query($connection, $querry);
             </ul>
         </aside>
         <main>
-            <h2>Manage Posts</h2>
+            <h2>Menaxho Postet</h2>
             <?php if(mysqli_num_rows($posts) > 0): ?>
             <table>
                 <thead>
@@ -108,7 +108,7 @@ $posts = mysqli_query($connection, $querry);
                     <tr>
                         <td><?= $post['title'] ?> </td>
                         <td><?= $category['title'] ?></td>
-                        <td><a href="<?= ROOT_URL ?>admin/edit-post.php?id=<?= $post['id'] ?>" class="btn sm">Edit</a></td>
+                        <td><a href="<?= ROOT_URL ?>admin/edit-post.php?id=<?= $post['id'] ?>" class="btn sm">Edito</a></td>
                         <td><a href="<?= ROOT_URL ?>admin/delete-post.php?id=<?= $post['id'] ?>" class="btn sm danger">Fshi</a></td>
 
                     </tr>
@@ -117,7 +117,7 @@ $posts = mysqli_query($connection, $querry);
                 </tbody>
             </table>
             <?php else: ?>
-           <div class="alert__message error">  <?= "nuk u gjend asnje post" ?>
+           <div class="alert__message error">  <?= "Nuk u gjet asnje post" ?>
            </div>
            <?php endif ?>
         </main>

@@ -29,7 +29,7 @@ function trackShare(platform, postId) {
         .then(data => {
             if (data.success) {
                 const el = document.getElementById('share-count');
-                if (el) el.textContent = data.count + (data.count === 1 ? ' share' : ' shares');
+                if (el) el.textContent = data.count + ' shperndarje';
             }
         });
 }
@@ -44,8 +44,8 @@ document.querySelectorAll('.share__btn').forEach(btn => {
             navigator.clipboard.writeText(POST_URL).then(() => {
                 const orig = this.innerHTML;
                 this.innerHTML = '<i class="uil uil-check"></i>';
-                this.title = 'Copied!';
-                setTimeout(() => { this.innerHTML = orig; this.title = 'Copy link'; }, 1500);
+                this.title = 'U kopjua!';
+                setTimeout(() => { this.innerHTML = orig; this.title = 'Kopjo linkun'; }, 1500);
             });
         }
         trackShare(platform, postId);
@@ -63,19 +63,19 @@ if (commentForm) {
         const fd = new FormData(this);
         const btn = this.querySelector('button[type="submit"]');
         btn.disabled = true;
-        btn.textContent = 'Posting…';
+        btn.textContent = 'Duke postuar…';
 
         fetch(ROOT_URL + 'add-comment.php', { method: 'POST', body: fd })
             .then(r => r.json())
             .then(data => {
                 btn.disabled = false;
-                btn.textContent = 'Post Comment';
+                btn.textContent = 'Posto Komentin';
                 if (!data.success) { alert(data.message); return; }
 
                 document.getElementById('comment-body').value = '';
                 const c = data.comment;
 
-                // Build comment HTML
+                // Ndertimi i HTML te komentit
                 const div = document.createElement('div');
                 div.className = 'comment__item comment__item--new';
                 div.innerHTML = `
@@ -93,14 +93,14 @@ if (commentForm) {
                 const list = document.getElementById('comment-list');
                 list.prepend(div);
 
-                // Update counts
+                // Perditeso numrat
                 const countEl  = document.getElementById('comment-count');
                 const countBar = document.getElementById('comment-count-bar');
                 const current  = parseInt(countEl.textContent) || 0;
                 countEl.textContent  = current + 1;
                 if (countBar) countBar.textContent = current + 1;
 
-                // Smooth scroll to the new comment
+                // Scroll i bute te komenti i ri
                 div.scrollIntoView({ behavior: 'smooth', block: 'center' });
             });
     });

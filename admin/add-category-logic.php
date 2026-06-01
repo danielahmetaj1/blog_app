@@ -3,7 +3,7 @@ require 'config/database.php';
 
  
 if(isset($_POST['submit'])){
-    //mer te dhenat e formes
+    //merr te dhenat e formes
     $title = filter_var($_POST['title'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $slug = filter_var($_POST['slug'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $created_at = filter_var($_POST['created_at'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);

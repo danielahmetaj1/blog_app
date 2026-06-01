@@ -5,7 +5,7 @@ if(isset($_GET['id'])){
     $id = filter_var($_GET['id'],FILTER_SANITIZE_NUMBER_INT);
     
 
-    // updetojme category_id te posteve qe i perket kategorise te pa autorizuar
+    // perditesojme category_id te posteve qe i perkasin kategorise te paautorizuar
     $update_query = "UPDATE posts SET category_id=5 WHERE category_id=$id";
     $update_result = mysqli_query($connection, $update_query);
      if(!mysqli_errno($connection)){

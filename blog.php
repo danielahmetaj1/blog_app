@@ -4,12 +4,12 @@ $posts = mysqli_query($connection, "SELECT * FROM posts ORDER BY created_at DESC
 ?>
 
 <section class="search__bar">
-    <form class="container search__bar-container" action="<?= ROOT_URL ?>search.php" method="GET">
-        <div>
+    <form class="container search__bar-wrapper" action="<?= ROOT_URL ?>search.php" method="GET">
+        <div class="search__bar-container">
             <i class="uil uil-search"></i>
-            <input type="search" name="search" placeholder="Kërko postime...">
+            <input type="search" name="search" placeholder="Kerko postime...">
         </div>
-        <button type="submit" class="btn">Kërko</button>
+        <button type="submit" class="search__submit"><i class="uil uil-search"></i></button>
     </form>
 </section>
 
@@ -24,11 +24,11 @@ $posts = mysqli_query($connection, "SELECT * FROM posts ORDER BY created_at DESC
         ?>
         <article class="post" id="post-<?= $post['id'] ?>">
             <div class="post__thumbnail">
-                <img src="<?= ROOT_URL ?>images/<?= htmlspecialchars($post['thumbnail']) ?>" alt="Post Thumbnail">
+                <img src="<?= ROOT_URL ?>images/<?= htmlspecialchars($post['thumbnail']) ?>" alt="Miniatura e postimit">
             </div>
             <div class="post__info">
                 <a href="<?= ROOT_URL ?>category-posts.php?id=<?= $post['category_id'] ?>" class="category__button">
-                    <?= htmlspecialchars($cat['title'] ?? 'Uncategorized') ?>
+                    <?= htmlspecialchars($cat['title'] ?? 'Pa kategori') ?>
                 </a>
                 <h3 class="post__title">
                     <a href="<?= ROOT_URL ?>post.php?id=<?= $post['id'] ?>"><?= htmlspecialchars($post['title']) ?></a>
@@ -43,8 +43,8 @@ $posts = mysqli_query($connection, "SELECT * FROM posts ORDER BY created_at DESC
                         <img src="<?= ROOT_URL ?>images/<?= htmlspecialchars($usr['avatar']) ?>" alt="">
                     </div>
                     <div class="post__author-info">
-                        <h5>By: <?= htmlspecialchars($usr['username']) ?></h5>
-                        <small><?= date('M d, Y', strtotime($post['created_at'])) ?></small>
+                        <h5>Nga: <?= htmlspecialchars($usr['username']) ?></h5>
+                        <small><?= date('d M, Y', strtotime($post['created_at'])) ?></small>
                     </div>
                 </div>
             </div>
@@ -67,7 +67,7 @@ $posts = mysqli_query($connection, "SELECT * FROM posts ORDER BY created_at DESC
 </section>
 
 <script>
-// Rikthe scroll-in kur kthehesh nga një post
+// Rikthe scroll-in kur kthehesh nga nje post
 const hash = window.location.hash;
 if (hash && hash.startsWith('#post-')) {
     const el = document.querySelector(hash);

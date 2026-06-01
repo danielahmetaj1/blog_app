@@ -1,9 +1,9 @@
 <?php
 require 'config/database.php';
 
-// kontrollojme nese butoni eshte shtyput
+// kontrollojme nese butoni eshte shtypur
 if(isset($_POST['submit'])) {
-    // marja e vlerave nga forma
+    // marrja e vlerave nga forma
     $id = filter_var($_POST['id'],FILTER_SANITIZE_NUMBER_INT);
     $previous_thumbnail_name = filter_var($_POST['previous_thumbnail_name'],FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $title = filter_var($_POST['title'],FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -20,7 +20,7 @@ if(isset($_POST['submit'])) {
     }elseif(!$category_id) {
         $_SESSION['edit-post'] = "Ju lutem zgjidhni nje kategori per postin";
     }elseif(!$body) {
-        $_SESSION['edit-post'] = "Ju lutem vendosni nej pershkrim per postit";
+        $_SESSION['edit-post'] = "Ju lutem vendosni nje pershkrim per postin";
     }else {        
         if($thumbnail['name']) {
             $previous_thumbnail_path = '../images/' . $previous_thumbnail_name;
@@ -41,14 +41,14 @@ if(isset($_POST['submit'])) {
             $extension = end($extension);
             if(in_array($extension, $allowed_files)) {
                 if($thumbnail['size'] < 2000000) {
-                     // levizim i file-it te ngarkuar ne destinacionin e deshiruar
+                     // levizja e file-it te ngarkuar ne destinacionin e deshiruar
                 move_uploaded_file($thumbnail_tmp_name, $thumbnail_destination_path);
                 }               
             }else {
                 $_SESSION['edit-post'] = "Ju lutem ngarkoni nje file imazhi (png, jpg, jpeg)";
             }
         }else {
-        $_SESSION['edit-post'] = "Ju lutem ngarkoni nje miniaturë ne formatin png, jpg ose jpeg";  
+        $_SESSION['edit-post'] = "Ju lutem ngarkoni nje miniature ne formatin png, jpg ose jpeg";  
         }
     }
 

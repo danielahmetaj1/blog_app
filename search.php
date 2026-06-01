@@ -18,24 +18,24 @@ $posts_count = $posts ? mysqli_num_rows($posts) : 0;
     <form class="container search__bar-contaainer" action="<?= ROOT_URL ?>search.php" method="GET">
         <div>
             <i class="uil uil-search"></i>
-            <input type="search" name="search" value="<?= htmlspecialchars($search) ?>" placeholder="Search">
+            <input type="search" name="search" value="<?= htmlspecialchars($search) ?>" placeholder="Kerko">
         </div>
-        <button type="submit" class="btn">Go</button>
+        <button type="submit" class="btn">Kerko</button>
     </form>
 </section>
 
 <section class="posts">
     <div class="container posts__container">
         <div class="search__results">
-            <h2>Search results for "<?= htmlspecialchars($search) ?>"</h2>
-            <p><?= $posts_count ?> result<?= $posts_count === 1 ? '' : 's' ?> found.</p>
+            <h2>Rezultatet e kerkimit per "<?= htmlspecialchars($search) ?>"</h2>
+            <p><?= $posts_count ?> rezultat<?= $posts_count === 1 ? '' : 'e' ?> u gjet<?= $posts_count === 1 ? '' : 'en' ?>.</p>
         </div>
 
         <?php if($posts_count > 0): ?>
             <?php while($post = mysqli_fetch_assoc($posts)): ?>
                 <article class="post">
                     <div class="post__thumbnail">
-                        <img src="./images/<?= htmlspecialchars($post['thumbnail']) ?>" alt="Post Thumbnail">
+                        <img src="./images/<?= htmlspecialchars($post['thumbnail']) ?>" alt="Miniatura e postimit">
                     </div>
                     <div class="post__info">
                         <?php 
@@ -59,11 +59,11 @@ $posts_count = $posts ? mysqli_num_rows($posts) : 0;
                                 $user = mysqli_fetch_assoc($user_result);
                             ?>
                             <div class="post__author-avatar">
-                                <img src="./images/<?= htmlspecialchars($user['avatar'] ?? 'avatar1.jpg') ?>" alt="Author Avatar">
+                                <img src="./images/<?= htmlspecialchars($user['avatar'] ?? 'avatar1.jpg') ?>" alt="Avatar i autorit">
                             </div>
                             <div class="post__author-info">
-                                <h5>By: <?= htmlspecialchars($user['username'] ?? 'Unknown') ?></h5>
-                                <small><?= date('M d, Y - H:i', strtotime($post['created_at'])) ?></small>
+                                <h5>Nga: <?= htmlspecialchars($user['username'] ?? 'I panjohur') ?></h5>
+                                <small><?= date('d M, Y - H:i', strtotime($post['created_at'])) ?></small>
                             </div>
                         </div>
                     </div>
@@ -71,7 +71,7 @@ $posts_count = $posts ? mysqli_num_rows($posts) : 0;
             <?php endwhile ?>
         <?php else: ?>
             <div class="empty__search-message">
-                <p>No posts matched your search. Try a different keyword.</p>
+                <p>Asnje postim nuk perputhet me kerkimin tuaj. Provo nje fjale tjeter.</p>
             </div>
         <?php endif ?>
     </div>

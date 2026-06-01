@@ -18,7 +18,7 @@ if(isset($_GET['id'])){
         
     
 
-    //fshi post nga database
+    //fshi post nga databaza
     $delete_post_query = "DELETE FROM posts WHERE id=$id";
     $delete_post_result=mysqli_query($connection, $delete_post_query);
     if(!mysqli_errno($connection)){

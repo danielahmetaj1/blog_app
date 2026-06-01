@@ -15,7 +15,7 @@ if(isset($_POST['submit'])){
         $query = "UPDATE users SET firstname='$firstname', lastname='$lastname', role='$is_admin' WHERE user_id=$id LIMIT 1";
         $result = mysqli_query($connection, $query);
         if(mysqli_errno($connection)){
-            $_SESSION['edit-user'] = " Ndodhi nje gabim ne perditesimin e perdoruesit";
+            $_SESSION['edit-user'] = "Ndodhi nje gabim ne perditesimin e perdoruesit";
         }else{
             $_SESSION['edit-user-success'] = "Perdoruesi $firstname $lastname u perditesua me sukses";
         }

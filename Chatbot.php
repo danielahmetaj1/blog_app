@@ -4,12 +4,12 @@ require 'config/constants.php';
 header('Content-Type: application/json');
 
 if (!isset($_SESSION['user-id'])) {
-    echo json_encode(['error' => 'Duhet të kyçesh për të përdorur chatbot-in.']);
+    echo json_encode(['error' => 'Duhet te kycesh per te perdorur chatbot-in.']);
     exit;
 }
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    echo json_encode(['error' => 'Invalid request.']);
+    echo json_encode(['error' => 'Kerkese e pavlefshme.']);
     exit;
 }
 
@@ -29,12 +29,8 @@ foreach ($messages as &$msg) {
 }
 unset($msg);
 
-// ── Groq API — FALAS 100% ────────────────────────────────────
-// 1. Shko te: console.groq.com
-// 2. Regjistrohu (falas, nuk kërkon kartë)
-// 3. Klik "API Keys" → "Create API Key"
-// 4. Vendose key-n këtu poshtë:
-$api_key = 'YOUR_GROQ_API_KEY'; // fillon me gsk_...
+
+$api_key = 'Celesi_api_ketu'; // fillon me gsk_...
 
 $payload = json_encode([
     'model'       => 'llama-3.3-70b-versatile',
@@ -43,7 +39,7 @@ $payload = json_encode([
     'messages'    => array_merge(
         [[
             'role'    => 'system',
-            'content' => 'Jeni asistenti i support-it të blogut WriteX. Ndihmoni përdoruesit me pyetje rreth platformës: si të publikojnë postime, si të menaxhojnë llogarinë, si të ndërveprojnë me postimet (likes, komente, share). Jini të shkurtër, miqësor dhe profesional. Përgjigjuni në gjuhën që flet përdoruesi.'
+            'content' => 'Jeni asistenti i support-it te blogut WriteX. Ndihmoni perdoruesit me pyetje rreth platformes: si te publikojne postime, si te menaxhojne llogarine, si te nderveprojne me postimet (pelqime, komente, shperndarje). Jini te shkurter, miqesor dhe profesional. Pergjigjuni ne gjuhen qe flet perdoruesi.'
         ]],
         $messages
     ),
@@ -68,12 +64,12 @@ curl_close($ch);
 
 if ($response === false || $http_code !== 200) {
     $error_data = json_decode($response, true);
-    $error_msg  = $error_data['error']['message'] ?? ('HTTP ' . $http_code . ' — ' . ($curl_err ?: $response));
-    echo json_encode(['error' => 'API Error: ' . $error_msg]);
+    $error_msg  = $error_data['error']['message'] ?? ('HTTP ' . $http_code . ' - ' . ($curl_err ?: $response));
+    echo json_encode(['error' => 'Gabim API: ' . $error_msg]);
     exit;
 }
 
 $data  = json_decode($response, true);
-$reply = $data['choices'][0]['message']['content'] ?? 'Nuk mora përgjigje. Provo përsëri.';
+$reply = $data['choices'][0]['message']['content'] ?? 'Nuk mora pergjigje. Provo perseri.';
 
 echo json_encode(['reply' => $reply]);

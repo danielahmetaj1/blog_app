@@ -1,7 +1,7 @@
 <?php 
 include 'partials/header.php';
 
-//mer te dhenat e kategorise nese eshte vendosur ne session
+//merr te dhenat e kategorise nese eshte vendosur ne session
 $title = $_SESSION['add-category-data']['title'] ?? null;
 $slug = $_SESSION['add-category-data']['slug'] ?? null;
 $created_at = $_SESSION['add-category-data']['created_at'] ?? null;
@@ -20,7 +20,7 @@ unset($_SESSION['add-category-data']);
         <form action="<?= ROOT_URL ?>admin/add-category-logic.php" method="POST">
             <input type="text" name="title" value="<?= $title ?>" placeholder="Titulli">
             <textarea rows="4" name="slug" placeholder="Pershkrimi"><?= $slug ?></textarea>
-            <textarea name="created_at" placeholder="Data e Krijimit(yyyy-mm-dd)"><?= $created_at ?></textarea>
+            <textarea name="created_at" placeholder="Data e Krijimit (yyyy-mm-dd)"><?= $created_at ?></textarea>
             <button type="submit" name="submit" class="btn">Shto Kategori</button>
         </form>
 

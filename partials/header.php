@@ -13,7 +13,7 @@ if(isset($_SESSION['user-id'])){
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sq">
 
 <head>
     <meta charset="UTF-8">
@@ -39,9 +39,9 @@ if(isset($_SESSION['user-id'])){
             <ul class="nav__items">
 
                 <li><a href="<?= ROOT_URL ?>blog.php">Blog</a></li>
-                <li><a href="<?= ROOT_URL ?>about.php">About</a></li>
-                <li><a href="<?= ROOT_URL ?>services.php">Services</a></li>
-                <li><a href="<?= ROOT_URL ?>contact.php">Contact</a></li>
+                <li><a href="<?= ROOT_URL ?>about.php">Rreth Nesh</a></li>
+                <li><a href="<?= ROOT_URL ?>services.php">Sherbime</a></li>
+                <li><a href="<?= ROOT_URL ?>contact.php">Kontakt</a></li>
             
                <?php if(isset($_SESSION['user-id'])): ?>
                     <li class="nav__profile">
@@ -49,18 +49,18 @@ if(isset($_SESSION['user-id'])){
                         <img src="<?= ROOT_URL. 'images/'. ($avatar['avatar'] ?? 'avatar1.jpg') ?>" alt="">
                     </div>
                     <ul>
-                        <li><a href="<?= ROOT_URL ?>admin/index.php">Dashboard</a></li>
-                        <li><a href="<?= ROOT_URL ?>logout.php">Logout</a></li>
+                        <li><a href="<?= ROOT_URL ?>admin/index.php">Paneli</a></li>
+                        <li><a href="<?= ROOT_URL ?>logout.php">Dil</a></li>
                     </ul>
 
                 </li>
                 <?php else: ?>
-                <li><a href="<?= ROOT_URL ?>signin.php">Sign In</a></li>
+                <li><a href="<?= ROOT_URL ?>signin.php">Kycu</a></li>
                 <?php endif ?>
             </ul>
-            <button id="close_nav-btn" aria-label="Close navigation menu"><i class="uil uil-multiply"
+            <button id="close_nav-btn" aria-label="Mbyll menune e navigimit"><i class="uil uil-multiply"
                     aria-hidden="true"></i></button>
-            <button id="open_nav-btn" aria-label="Open navigation menu"><i class="uil uil-bars"
+            <button id="open_nav-btn" aria-label="Hap menune e navigimit"><i class="uil uil-bars"
                     aria-hidden="true"></i></button>
         </div>
     </nav>

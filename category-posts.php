@@ -1,7 +1,7 @@
 <?php
 include 'partials/header.php';
 
-//bejme fetch  nese id eshte i vendosur ne url
+//bejme fetch nese id eshte i vendosur ne url
 if(isset($_GET['id'])){
     $id = (int) filter_var($_GET['id'], FILTER_SANITIZE_NUMBER_INT);
     $query = "SELECT * FROM categories WHERE id=$id";
@@ -36,7 +36,7 @@ else{
             <?php while($post = mysqli_fetch_assoc($posts)): ?>
             <article class="post">
                 <div class="post__thumbnail">
-                    <img src="./images/<?= $post['thumbnail'] ?>" alt="Post Thumbnail">
+                    <img src="./images/<?= $post['thumbnail'] ?>" alt="Miniatura e postimit">
                 </div>
                 <div class="post__info">
                   
@@ -55,12 +55,12 @@ else{
                     $user = mysqli_fetch_assoc($user_result);
                     ?>
                         <div class="post__author-avatar">
-                            <img src="./images/<?= $user['avatar'] ?>" alt="Author Avatar">
+                            <img src="./images/<?= $user['avatar'] ?>" alt="Avatar i autorit">
                         </div>
                         <div class="post__author-info">
-                             <h5>By: <?= $user['username'] ?></h5>
+                             <h5>Nga: <?= $user['username'] ?></h5>
                             <small>
-                                 <?= date('M d, Y - H:i', strtotime($post['created_at'])) ?> 
+                                 <?= date('d M, Y - H:i', strtotime($post['created_at'])) ?> 
                             </small>
                         </div>
                     </div>
@@ -71,7 +71,7 @@ else{
     </section>
 <?php else: ?>
     <div class="alert__message error lg">
-        <p>Nuk u gjend asnje postim per kete kategori.</p>
+        <p>Nuk u gjet asnje postim per kete kategori.</p>
     </div>
 <?php endif ?>
     <!-- =============fundi i postimeve=========-->

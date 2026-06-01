@@ -24,7 +24,7 @@ if(isset($_GET['id'])){
             <input type="hidden" name="id" value="<?=  $category['id'] ?>">
             <input type="text" name="title"  value="<?= $category['title'] ?>" placeholder="Titulli">
             <textarea rows="4" name="slug" placeholder="Pershkrimi"><?=  $category['slug'] ?></textarea>
-            <button type="submit" name="submit" class="btn">Perditso Kategorine</button>
+            <button type="submit" name="submit" class="btn">Perditeso Kategorine</button>
         </form>
 
     </div>

@@ -1,9 +1,9 @@
 <?php 
 require 'config/database.php';
 
-//merrni te dhenat e formularit te regjistrimit nese butoni i regjistrimit u shtypet
+//merr te dhenat e formularit te regjistrimit nese butoni i regjistrimit u shtyp
  if(isset($_POST['submit'])){
-    //merrni te dhanat e formularit
+    //merr te dhenat e formularit
     $firstname = filter_var($_POST['firstname'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $lastname = filter_var($_POST['lastname'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $username = filter_var($_POST['username'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -15,42 +15,42 @@ require 'config/database.php';
 
     //kontrolloni vlerat e hyrjes
     if(!$firstname){
-        $_SESSION['signup'] = "Please enter your First Name";
+        $_SESSION['signup'] = "Ju lutem vendosni emrin tuaj";
     }
     elseif(!$lastname){
-        $_SESSION['signup'] = "Please enter your Last Name";
+        $_SESSION['signup'] = "Ju lutem vendosni mbiemrin tuaj";
     }
     elseif(!$username){
-        $_SESSION['signup'] = "Please enter your Username";
+        $_SESSION['signup'] = "Ju lutem vendosni username-in tuaj";
     }
     elseif(!$email){
-        $_SESSION['signup'] = "Please enter a valid Email";
+        $_SESSION['signup'] = "Ju lutem vendosni nje email valid";
     }
     elseif(strlen($createpassword) < 8 || strlen($confirmpassword) < 8){
-        $_SESSION['signup'] = "Password should be at least 8 characters";
+        $_SESSION['signup'] = "Password duhet te jete te pakten 8 karaktere";
     }
     elseif(!$avatar['name']){
-        $_SESSION['signup'] = "Please select an Avatar";
+        $_SESSION['signup'] = "Ju lutem zgjidhni nje avatar";
     }
     else{
         //kontrolloni nese fjalekalimet nuk perputhen
         if($createpassword !== $confirmpassword){
-            $_SESSION['signup'] = "Passwords do not match";
+            $_SESSION['signup'] = "Password-et nuk perputhen";
         }
         else{
             //hash-oj fjalekalimet
             $hashed_password = password_hash($createpassword, PASSWORD_DEFAULT);
              
-            //kontrolloni nese emri i perdoruesit ose emaili ekziston ne bazin e te dhenave
+            //kontrolloni nese emri i perdoruesit ose emaili ekziston ne bazen e te dhenave
             $user_check_query = "SELECT * FROM users WHERE username='$username' OR email='$email' ";
             $user_check_result = mysqli_query($connection, $user_check_query);
             if(mysqli_num_rows($user_check_result) > 0){
-                $_SESSION['signup'] = "Username or Email already exists";
+                $_SESSION['signup'] = "Username ose Email ekziston tashme";
             }
             else{
                 //PUNO ME AVATAR
                 //riemertoni avatarin
-                $time = time(); //beni cdo emer imazhi unik duke perdorur kohen e tashme
+                $time = time(); //bej cdo emer imazhi unik duke perdorur kohen e tashme
                 $avatar_name = $time . $avatar['name'];
                 $avatar_tmp_name = $avatar['tmp_name'];
                 $avatar_destination_path = 'images/' . $avatar_name;
@@ -66,18 +66,18 @@ require 'config/database.php';
                         move_uploaded_file($avatar_tmp_name, $avatar_destination_path);
                     }
                     else{
-                        $_SESSION['signup'] = "File size should be less than 1mb";
+                        $_SESSION['signup'] = "Madhesia e file duhet te jete me pak se 1mb";
                     }
                 }
                 else{
-                    $_SESSION['signup'] = "File should be png, jpg, or jpeg";
+                    $_SESSION['signup'] = "File duhet te jete png, jpg, ose jpeg";
                 }
             }
         }
     }
     //ridrejtoni mbrapa ne faqen e regjistrimit nese ka nje gabim
     if(isset($_SESSION['signup'])){
-        //kaloni te dhanat e formularit mbrapa ne faqen e regjistrimit
+        //kaloni te dhenat e formularit mbrapa ne faqen e regjistrimit
         $_SESSION['signup-data'] = $_POST;
         header('location: ' . ROOT_URL . 'signup.php');
         die();
@@ -90,14 +90,14 @@ require 'config/database.php';
         $insert_user_result = mysqli_query($connection, $insert_user_query);
         if(!mysqli_errno($connection)){
             //ridrejtoni ne faqen e hyrjes me nje mesazh suksesi
-            $_SESSION['signup-success'] = "Registration successful. Please sign in.";
+            $_SESSION['signup-success'] = "Regjistrimi u krye me sukses. Ju lutem kycuni.";
             header('location: ' . ROOT_URL . 'signin.php');
             die();
         }
     }
 }
 else{
-    //nese butoni nuk u shtypet, kthehu mbrapa ne faqen e regjistrimit
+    //nese butoni nuk u shtyp, kthehu mbrapa ne faqen e regjistrimit
     header('location: ' . ROOT_URL . 'signup.php');
     die();
 }
